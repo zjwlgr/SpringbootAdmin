@@ -3,7 +3,7 @@ package com.brander.common.enums;
 /**
  * Exception的错误代码 与 错误信息 的 枚举
  */
-public enum ResultEnum {
+public enum JsonResultEnum {
     UNKONW_ERROR(-1, "未知错误"),
     SUCCESS(0, "成功"),
     PRIMARY_SCHOOL(100, "我猜你可能还在上小学"),
@@ -14,7 +14,7 @@ public enum ResultEnum {
 
     private String msg;
 
-    ResultEnum(Integer code, String msg) {
+    JsonResultEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }

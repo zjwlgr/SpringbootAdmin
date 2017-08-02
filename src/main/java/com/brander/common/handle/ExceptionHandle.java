@@ -1,8 +1,8 @@
 package com.brander.common.handle;
 
-import com.brander.common.domain.Result;
+import com.brander.common.domain.JsonResult;
 import com.brander.common.exception.JsonException;
-import com.brander.common.utils.ResultUtil;
+import com.brander.common.utils.JsonResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,9 +29,9 @@ public class ExceptionHandle {
     * */
     @ExceptionHandler(value = JsonException.class)
     @ResponseBody
-    public Result girlHandle(Exception e){
+    public JsonResult girlHandle(Exception e){
         JsonException JsonException = (JsonException) e;
-        return ResultUtil.error(JsonException.getCode(), JsonException.getMessage());
+        return JsonResultUtil.error(JsonException.getCode(), JsonException.getMessage());
     }
 
     /*

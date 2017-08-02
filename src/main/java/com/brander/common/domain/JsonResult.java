@@ -3,7 +3,7 @@ package com.brander.common.domain;
 /**
  * HTTP 请求返回的最外层对象
  */
-public class Result<T> {  //这个泛型 T 代标所有类型 。。。。
+public class JsonResult<T> {  //这个泛型 T 代标所有类型 。。。。
 
     //错误代码
     private Integer code;

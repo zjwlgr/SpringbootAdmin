@@ -1,6 +1,6 @@
 package com.brander.common.service;
 
-import com.brander.common.enums.ResultEnum;
+import com.brander.common.enums.JsonResultEnum;
 import com.brander.common.exception.JsonException;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class TestService {
     * */
     public void testResult(Integer age) throws Exception{
         if(age < 12) {
-            throw new JsonException(ResultEnum.PRIMARY_SCHOOL);
+            throw new JsonException(JsonResultEnum.PRIMARY_SCHOOL);
         }
     }
 
