@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  context-path: /
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    mode: LEGACYHTML5 #thymeleaf单标记问题
+    cache: false #关闭thymeleaf缓存
+    encoding: utf-8
+    content-type: text/html
+  jackson:
+    default-property-inclusion: non_null #输入json的时候，如果有属性值为null而不打印该属性
+mybatis:
+  type-aliases-package: cn.form1.domain #指定domain类的基包
+  mapper-locations: classpath:mapper/*.xml #指定*Mapper.xml的位置
+  config-location: classpath:mybatis-config.xml
+  check-config-location: true

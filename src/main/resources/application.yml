@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    active: dev
+#debug: true #查看已启用和未启用的自动配置报告
