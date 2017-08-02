@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="csrf-param" content="_csrf"/>
+    <title>Home</title>
+    <meta content="" name="keywords"/>
+    <meta content="" name="description"/>
+    <link type="image/x-icon" th:src="@{favicon.ico}" rel="shortcut icon"/>
+    <link th:src="@{bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<span th:text="${userphone}">电话号码</span>
+
+
+<script th:src="@{js/jquery-1.9.1.min.js}"></script>
+<script th:src="@{bootstrap/js/bootstrap.js}"></script>
+</body>
+</html>
+
