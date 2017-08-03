@@ -1,0 +1,10 @@
+body{font-family: 'Courier New', 'Microsoft Yahei',微软雅黑; background: #ebf4fe;}
+input,button,select,textarea{outline:none}
+textarea{resize:none}
+a:focus{outline: none;}
+
+ul,li{margin:0px;padding:0px;border:none;list-style:none;font-style:normal;font-weight:normal; text-decoration:none;}
+
+::selection{background:#a63f16;color:#FFF;}
+::-moz-selection{background:#a63f16;color:#FFF;}
+

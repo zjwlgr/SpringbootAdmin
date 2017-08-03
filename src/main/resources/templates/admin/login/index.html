@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/layout/head :: head"></head>
+<body>
+
+<style type="text/css">
+    body{background: #5E87B0;}
+</style>
+<div class="container">
+
+    <div class="login">
+        <h3 class="form-title">后台管理系统入口<small>&nbsp;Login</small></h3>
+        <form id="form1_login" name="form1_login" method="post" action="">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" name="ManagerInfo[username]" id="username" placeholder="username">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" name="ManagerInfo[password]" id="password" placeholder="password">
+            </div>
+            <div class="form-group">
+                <label for="validates">验证码</label>
+                <div class="row show-grid">
+                    <div class="col-md-5">
+                        <input type="text" class="form-control validate" name="ManagerInfo[validates]" id="validates" placeholder="validate">
+                    </div>
+                    <div class="col-md-7">
+                        <img class="image" src="http://form1.cn/admin/login/captcha.html" onclick="this.src='/admin/login/captcha.html?r='+Math.random();">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="loading">
+                提&nbsp;交 <i class="glyphicon glyphicon-circle-arrow-right glyphicon_top_left"></i>
+            </button>
+        </form>
+        <div class="create-account">
+            <p>Copyright © 2016-2017 by MyDocument <a href="http://form1.cn" target="_blank">form1.cn</a><br /> All Rights Reserved. version 1.0</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

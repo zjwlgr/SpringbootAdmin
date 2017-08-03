@@ -12,7 +12,7 @@ public class IndexController {
 
     @GetMapping(value = "/")
     public String index(ModelMap map){
-        map.addAttribute("userphone", "13141437817");
+        map.addAttribute("Model", "Model");
         return "index/index/index";
     }
 
