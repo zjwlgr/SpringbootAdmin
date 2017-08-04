@@ -22,13 +22,10 @@ public class LoginController {
 
     @GetMapping(value = "/login")
     public String login(ModelMap map){
-        SimpleDateFormat df = new SimpleDateFormat("yyyy");
-
 
 
 
         map.addAttribute("myconfig",myConfigProperties);
-        map.addAttribute("year",df.format(new Date()));
         return "admin/login/index";
     }
 

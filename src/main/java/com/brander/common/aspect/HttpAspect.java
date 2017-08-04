@@ -1,10 +1,13 @@
 package com.brander.common.aspect;
 
+import com.brander.common.properties.MyConfigProperties;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component //把普通pojo实例化到spring容器中
 public class HttpAspect {
+
+    @Autowired
+    MyConfigProperties myConfigProperties;
 
     //Logger是Spring自带的一个日志框架
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
@@ -34,7 +40,7 @@ public class HttpAspect {
         表示匹配com.savage.server包及其子包下的所有方法
     * 以下 只匹配 com.brander.index.controller.IndexController类中的所有方法
     * */
-    @Pointcut("execution(public * com.brander.index.controller.IndexController.*(..))")
+    @Pointcut("execution(public * com.brander.admin.controller..*.*(..))")
     public void log(){
     }
 
@@ -44,25 +50,8 @@ public class HttpAspect {
     * @param JoinPoint 得到被执行的类。方法等  JoinPoint 记得先 import org.aspectj.lang.JoinPoint;
     * */
     @Before("log()")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
-        ServletRequestAttributes attributes =  (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        //获取request对象，获取url,ip,method等信息
+    public void doBefore() throws Throwable {
 
-        //url
-        logger.info("url={}",request.getRequestURL());
-
-        //ip
-        //logger.info("ip={}",request.getRemoteAddr());
-
-        //method
-        //logger.info("method={}",request.getMethod());
-
-        //class_function 类名与方法名
-        //logger.info("class_function={}", joinPoint.getSignature().getDeclaringType() + "." + joinPoint.getSignature().getName());
-
-        //args 参数
-        //logger.info("args={}", joinPoint.getArgs());
     }
 
     /*
@@ -71,7 +60,8 @@ public class HttpAspect {
     * */
     @After("log()")
     public void  doAfter(){
-        logger.info("After");
+
+        //logger.info("After");
     }
 
     /*

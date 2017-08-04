@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class IndexsController {
+public class DefaultController {
 
     @GetMapping(value = "/index")
     public String index(){
