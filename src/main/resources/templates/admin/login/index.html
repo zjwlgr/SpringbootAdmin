@@ -5,10 +5,6 @@
 
 
 
-<p th:text="#{welcome}"></p>
-
-
-
 <style type="text/css">
     body{background: #5E87B0;}
 </style>
@@ -41,7 +37,11 @@
             </button>
         </form>
         <div class="create-account">
-            <p>Copyright © 2017-[[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] by <a th:href="'http://'+${myconfig.getWeburl()}" target="_blank">[[${myconfig.getWeburl()}]]</a><br /> All Rights Reserved. version [[${myconfig.getVersion()}]]</p>
+            <p>
+                Copyright © 2017-[[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] by
+                <a href="www.form1.cn" target="_blank">www.form1.cn</a>
+                <br /> All Rights Reserved. version 1.0.0
+            </p>
         </div>
     </div>
 
