@@ -21,6 +21,6 @@ mybatis:
 #自定义配置
 myconfig:
   version: 1.0.0
-  weburl: form1.cn
+  weburl: www.form1.cn
   webname: SpringbootTest
   adminname: 后台管理系统

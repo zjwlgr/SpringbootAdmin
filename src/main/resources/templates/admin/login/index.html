@@ -9,7 +9,7 @@
 <div class="container">
 
     <div class="login">
-        <h3 class="form-title">后台管理系统入口<small>&nbsp;Login</small></h3>
+        <h3 class="form-title"><span th:text="${myconfig.getAdminname()}">后台管理系统</span>入口<small>&nbsp;Login</small></h3>
         <form id="form1_login" name="form1_login" method="post" action="">
             <div class="form-group">
                 <label for="username">用户名</label>
@@ -35,7 +35,7 @@
             </button>
         </form>
         <div class="create-account">
-            <p>Copyright © 2017-<span th:text="${year}"></span> by <a href="http://form1.cn" target="_blank">www.form1.cn</a><br /> All Rights Reserved. version 1.0.0</p>
+            <p>Copyright © 2017-<span th:text="${year}"></span> by <a th:href="'http://'+${myconfig.getWeburl()}" target="_blank" th:text="${myconfig.getWeburl()}">www.form1.cn</a><br /> All Rights Reserved. version <span th:text="${myconfig.getVersion()}">1.0.0</span></p>
         </div>
     </div>
 

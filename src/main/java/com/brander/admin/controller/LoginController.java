@@ -1,5 +1,7 @@
 package com.brander.admin.controller;
 
+import com.brander.common.properties.MyConfigProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +17,18 @@ import java.util.Date;
 @RequestMapping(value = "/admin")
 public class LoginController {
 
+    @Autowired
+    MyConfigProperties myConfigProperties;
+
     @GetMapping(value = "/login")
     public String login(ModelMap map){
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
-        String year = df.format(new Date());
-        map.addAttribute("year",year);
+
+
+
+
+        map.addAttribute("myconfig",myConfigProperties);
+        map.addAttribute("year",df.format(new Date()));
         return "admin/login/index";
     }
 
