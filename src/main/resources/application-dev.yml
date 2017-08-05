@@ -16,10 +16,3 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml #指定*Mapper.xml的位置
   config-location: classpath:mybatis-config.xml
   check-config-location: true
-
-#自定义配置
-myconfig:
-  version: 1.0.0
-  weburl: www.form1.cn
-  webname: SpringbootTest
-  adminname: 后台管理系统

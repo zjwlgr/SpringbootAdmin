@@ -11,7 +11,7 @@
 <div class="container">
 
     <div class="login">
-        <h3 class="form-title"><span>后台管理系统</span>入口<small>&nbsp;Login</small></h3>
+        <h3 class="form-title">[[#{adminname}]]入口<small>&nbsp;Login</small></h3>
         <form id="form1_login" name="form1_login" method="post" action="">
             <div class="form-group">
                 <label for="username">用户名</label>
@@ -39,8 +39,8 @@
         <div class="create-account">
             <p>
                 Copyright © 2017-[[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] by
-                <a href="www.form1.cn" target="_blank">www.form1.cn</a>
-                <br /> All Rights Reserved. version 1.0.0
+                <a th:href="'http://'+#{weburl}" target="_blank">[[#{weburl}]]</a>
+                <br /> All Rights Reserved. version [[#{version}]]
             </p>
         </div>
     </div>
