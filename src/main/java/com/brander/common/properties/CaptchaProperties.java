@@ -34,7 +34,7 @@ public class CaptchaProperties {
         properties.setProperty("kaptcha.image.width", "156");
 
         // 验证码图片高度  默认为50
-        properties.setProperty("kaptcha.image.height", "33");
+        properties.setProperty("kaptcha.image.height", "34");
 
         //验证码文本字符大小  默认为40
         properties.setProperty("kaptcha.textproducer.font.size","25");
