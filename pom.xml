@@ -111,7 +111,7 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
-		<!--解决thymelaef单标签不闭合问题-->
+		<!--解决thymelaef单标签不闭合报错的问题-->
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
@@ -125,6 +125,13 @@
 			<artifactId>druid</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+
+		<!-- kaptcha验证码的依赖 -->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
 
 		<!--devtools热部署-->
 		<dependency>
