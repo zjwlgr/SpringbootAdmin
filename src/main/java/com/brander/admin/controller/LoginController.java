@@ -22,8 +22,6 @@ import java.io.ByteArrayOutputStream;
 @RequestMapping(value = "/admin")
 public class LoginController {
 
-
-
     @GetMapping(value = "/login")
     public String login(){
 
