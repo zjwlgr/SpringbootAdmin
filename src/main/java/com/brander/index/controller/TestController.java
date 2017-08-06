@@ -3,7 +3,9 @@ package com.brander.index.controller;
 import com.brander.common.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 测试类
@@ -27,9 +29,10 @@ public class TestController {
     * 测试系统Exception
     * */
     @GetMapping(value = "/test_system")
-    //@ResponseBody
+    @ResponseBody
     public String test_system(){
-        return "hh";
+        String str = "abc";
+        return str;
     }
 
 }
