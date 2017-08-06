@@ -8,6 +8,12 @@ import java.security.NoSuchAlgorithmException;
  * sha1加密
  */
 public class Sha1Util {
+
+    /**
+     * sha1加密
+     * @param str 要加密的字符串
+     * @return String 加密后的字符串
+     */
     public static String getSha1(String str){
         if (null == str || 0 == str.length()){
             return null;

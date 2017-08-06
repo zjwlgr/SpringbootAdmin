@@ -6,8 +6,11 @@ import java.security.MessageDigest;
  * 采用MD5加密解密
  */
 public class MD5Util {
-    /***
+
+    /**
      * MD5加码 生成32位md5码
+     * @param inStr 要加密的字符串
+     * @return String 加密后的字符串
      */
     public static String string2MD5(String inStr){
         MessageDigest md5 = null;
@@ -35,26 +38,10 @@ public class MD5Util {
 
     }
 
-    /**
-     * 加密解密算法 执行一次加密，两次解密
-     */
-    public static String convertMD5(String inStr){
-
-        char[] a = inStr.toCharArray();
-        for (int i = 0; i < a.length; i++){
-            a[i] = (char) (a[i] ^ 't');
-        }
-        String s = new String(a);
-        return s;
-
-    }
-
     // 测试主函数
     public static void main(String args[]) {
         String s = "xtwvfwlgr";
         System.out.println("原始：" + s);
         System.out.println("MD5后：" + string2MD5(s));
-        System.out.println("加密的：" + convertMD5(s));
-        System.out.println("解密的：" + convertMD5(convertMD5(s)));
     }
 }
