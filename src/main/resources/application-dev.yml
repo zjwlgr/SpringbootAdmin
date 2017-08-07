@@ -2,6 +2,10 @@ server:
   port: 8080
   context-path: /
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   thymeleaf:
     mode: LEGACYHTML5 #thymeleaf单标记问题
     cache: false #关闭thymeleaf缓存

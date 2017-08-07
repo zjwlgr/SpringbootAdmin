@@ -7,8 +7,7 @@
     <!--导入属性配置，前面我们写的一个配置文件，你也可以直接使用mybatis的jdbc的配置文件 -->
     <properties resource="jdbc.properties"></properties>
     <!-- 数据库驱动，注意，这里必须要修改成你的数据库的驱动地址-->
-    <classPathEntry
-            location="C:\Program Files\Java\maven_repo\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.43.jar"/>
+    <classPathEntry location="C:\Program Files\Java\maven_repo\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
