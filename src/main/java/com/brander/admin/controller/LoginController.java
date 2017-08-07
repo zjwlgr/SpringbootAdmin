@@ -22,20 +22,29 @@ import java.io.ByteArrayOutputStream;
 @RequestMapping(value = "/admin")
 public class LoginController {
 
+    /**
+    * 管理员登录页面
+    * */
     @GetMapping(value = "/login")
     public String login(){
-
         return "admin/login/index";
     }
 
+    /**
+    * 管理员登录提交操作
+    * */
     @PostMapping(value = "/login_action")
     public void login_action(){
 
     }
 
+    /**导入验证码配置类*/
     @Autowired
     DefaultKaptcha defaultKaptcha;
 
+    /**
+     * 验证码生成方法
+     * */
     @GetMapping("/kaptcha")
     public void defaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception{
         byte[] captchaChallengeAsJpeg = null;

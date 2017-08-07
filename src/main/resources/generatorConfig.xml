@@ -8,7 +8,7 @@
     <properties resource="jdbc.properties"></properties>
     <!-- 数据库驱动，注意，这里必须要修改成你的数据库的驱动地址-->
     <classPathEntry
-            location="C:\Program Files\Java\maven_repo\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar"/>
+            location="C:\Program Files\Java\maven_repo\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.43.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
@@ -22,7 +22,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="cn.form1.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.brander.common.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -36,13 +36,13 @@
         XMLMAPPER ： 带有xml的mapping
         ANNOTATEDMAPPER : 使用注解方式
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.form1.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.brander.common.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名，这里举例，只配置了一个table，你可以配置多个-->
 
-        <table tableName="yi_article" domainObjectName="yi_article"
+        <table tableName="fo_manager" domainObjectName="fo_manager"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
