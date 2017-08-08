@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.brander.common.mapper.fo_managerMapper" >
-  <resultMap id="BaseResultMap" type="com.brander.common.domain.fo_manager" >
+<mapper namespace="com.brander.common.mapper.FoManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.brander.common.domain.FoManager" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -22,11 +22,20 @@
     from fo_manager
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--根据用户名查询单条数据-->
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_manager
+    where username = #{username}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fo_manager
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.brander.common.domain.fo_manager" >
+  <insert id="insert" parameterType="com.brander.common.domain.FoManager" >
     insert into fo_manager (id, username, password, 
       uname, group_id, locking, 
       number, login_ip, login_time, 
@@ -36,7 +45,7 @@
       #{number,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=INTEGER}, 
       #{ctime,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.brander.common.domain.fo_manager" >
+  <insert id="insertSelective" parameterType="com.brander.common.domain.FoManager" >
     insert into fo_manager
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -103,7 +112,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.brander.common.domain.fo_manager" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.brander.common.domain.FoManager" >
     update fo_manager
     <set >
       <if test="username != null" >
@@ -136,7 +145,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.brander.common.domain.fo_manager" >
+  <update id="updateByPrimaryKey" parameterType="com.brander.common.domain.FoManager" >
     update fo_manager
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

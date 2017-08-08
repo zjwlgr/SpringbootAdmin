@@ -1,6 +1,6 @@
 package com.brander.common.domain;
 
-public class fo_manager {
+public class FoManager {
     private Integer id;
 
     private String username;
@@ -99,5 +99,21 @@ public class fo_manager {
 
     public void setCtime(Integer ctime) {
         this.ctime = ctime;
+    }
+
+    @Override
+    public String toString() {
+        return "FoManager{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", uname='" + uname + '\'' +
+                ", groupId=" + groupId +
+                ", locking=" + locking +
+                ", number=" + number +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginTime=" + loginTime +
+                ", ctime=" + ctime +
+                '}';
     }
 }

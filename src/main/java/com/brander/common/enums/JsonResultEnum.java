@@ -4,10 +4,13 @@ package com.brander.common.enums;
  * Exception的错误代码 与 错误信息 的 枚举
  */
 public enum JsonResultEnum {
+
     UNKONW_ERROR(-1, "未知错误"),
     SUCCESS(0, "成功"),
-    PRIMARY_SCHOOL(100, "我猜你可能还在上小学"),
-    MIDDLE_SCHOOL(101, "你可能在上初中"),
+
+    VALIDATE_ERROR(100, "验证码输入错误"),
+    ADMIN_USER_NULL(101, "管理员用户名不存在"),
+    ADMIN_PASS_ERROR(102, "密码输入错误"),
     ;
 
     private Integer code;

@@ -22,13 +22,13 @@ $(function(){
             return false;
         }
         $("#loading").button('loading');
-        $.post("/admin/login/index.html",$("#form1_login").serialize(),function(data){
-            if(data.code == 0){
+        $.post("/admin/loginAction",$("#form1_login").serialize(),function(data){
+            if(data.code != 0){
                 art.dialog({lock: true,opacity: 0.5,content: data.msg,icon: 'error',ok: function(){}});
                 $(".image").click();
                 $("#loading").button('reset');
             }else{
-                window.location.href = data.msg;
+                window.location.href = '/admin/index';
             }
         },'json');
         return false

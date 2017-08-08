@@ -1,11 +1,15 @@
 package com.brander.admin.controller;
 
+import com.brander.common.domain.FoManager;
+import com.brander.common.domain.JsonResult;
+import com.brander.common.enums.JsonResultEnum;
+import com.brander.common.exception.JsonException;
+import com.brander.common.service.FoManagerService;
+import com.brander.common.utils.JsonResultUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
@@ -22,6 +26,9 @@ import java.io.ByteArrayOutputStream;
 @RequestMapping(value = "/admin")
 public class LoginController {
 
+    @Autowired
+    FoManagerService foManagerService;
+
     /**
     * 管理员登录页面
     * */
@@ -33,9 +40,21 @@ public class LoginController {
     /**
     * 管理员登录提交操作
     * */
-    @PostMapping(value = "/login_action")
-    public void login_action(){
+    @PostMapping(value = "/loginAction")
+    @ResponseBody
+    public JsonResult login_action(@RequestParam(value = "username") String username,
+                                   @RequestParam(value = "password") String password,
+                                   @RequestParam(value = "validates") String validates,
+                                   HttpServletRequest httpServletRequest) throws Exception{
 
+        String captchaId = (String)httpServletRequest.getSession().getAttribute("vrifyCode");
+        if (!captchaId.equals(validates)) {
+            throw new JsonException(JsonResultEnum.VALIDATE_ERROR);
+        } else {
+            FoManager foManager = foManagerService.loginAction(username,password);
+            //TODO 注册session，更新次数、ip、登录时间  记录管理员登录信息  该管理员已被系统锁定
+            return JsonResultUtil.success();
+        }
     }
 
     /**导入验证码配置类*/
@@ -72,24 +91,6 @@ public class LoginController {
         responseOutputStream.write(captchaChallengeAsJpeg);
         responseOutputStream.flush();
         responseOutputStream.close();
-    }
-
-    @RequestMapping("/imgvrifyControllerDefaultKaptcha")
-    public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse){
-        ModelAndView andView = new ModelAndView();
-        String captchaId = (String) httpServletRequest.getSession().getAttribute("vrifyCode");
-        String parameter = httpServletRequest.getParameter("vrifyCode");
-        System.out.println("Session  vrifyCode "+captchaId+" form vrifyCode "+parameter);
-
-        if (!captchaId.equals(parameter)) {
-            andView.addObject("info", "错误的验证码");
-            andView.setViewName("index");
-        } else {
-            andView.addObject("info", "登录成功");
-            andView.setViewName("succeed");
-
-        }
-        return andView;
     }
 
 }

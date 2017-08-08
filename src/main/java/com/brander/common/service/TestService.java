@@ -15,7 +15,7 @@ public class TestService {
     * */
     public void testResult(Integer age) throws Exception{
         if(age < 12) {
-            throw new JsonException(JsonResultEnum.PRIMARY_SCHOOL);
+            throw new JsonException(JsonResultEnum.ADMIN_USER_NULL);
         }
     }
 

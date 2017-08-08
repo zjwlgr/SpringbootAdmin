@@ -15,17 +15,17 @@
         <form id="form1_login" name="form1_login" method="post" action="">
             <div class="form-group">
                 <label for="username">用户名</label>
-                <input type="text" class="form-control" name="ManagerInfo[username]" id="username" placeholder="username">
+                <input type="text" class="form-control" name="username" id="username" placeholder="username">
             </div>
             <div class="form-group">
                 <label for="password">密码</label>
-                <input type="password" class="form-control" name="ManagerInfo[password]" id="password" placeholder="password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="password">
             </div>
             <div class="form-group">
                 <label for="validates">验证码</label>
                 <div class="row show-grid">
                     <div class="col-md-5">
-                        <input type="text" class="form-control validate" name="ManagerInfo[validates]" id="validates" placeholder="validate">
+                        <input type="text" class="form-control validate" name="validates" id="validates" placeholder="validate">
                     </div>
                     <div class="col-md-7">
                         <img class="image" src="/admin/kaptcha" onclick="this.src='/admin/kaptcha?r='+Math.random();">
