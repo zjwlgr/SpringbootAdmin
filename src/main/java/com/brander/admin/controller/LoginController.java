@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 
 /**
  * 管理员登录
@@ -28,6 +29,10 @@ public class LoginController {
 
     @Autowired
     FoManagerService foManagerService;
+
+    /**导入验证码配置类*/
+    @Autowired
+    DefaultKaptcha defaultKaptcha;
 
     /**
     * 管理员登录页面
@@ -49,17 +54,18 @@ public class LoginController {
 
         String captchaId = (String)httpServletRequest.getSession().getAttribute("vrifyCode");
         if (!captchaId.equals(validates)) {
-            throw new JsonException(JsonResultEnum.VALIDATE_ERROR);
+            throw new JsonException(JsonResultEnum.ADMIN_VALIDATE_ERROR);
         } else {
+            //验证成功后返回用户信息对象
             FoManager foManager = foManagerService.loginAction(username,password);
-            //TODO 注册session，更新次数、ip、登录时间  记录管理员登录信息  该管理员已被系统锁定
+            foManager.setLoginIp(httpServletRequest.getRemoteAddr());
+            foManager.setNumber(foManager.getNumber() + 1);
+            foManager.setLoginTime((int)(new Date().getTime()));
+            foManagerService.updateByPrimaryKeySelective(foManager); //更新次数、ip、登录时间
+            //TODO 注册session，记录管理员登录信息
             return JsonResultUtil.success();
         }
     }
-
-    /**导入验证码配置类*/
-    @Autowired
-    DefaultKaptcha defaultKaptcha;
 
     /**
      * 验证码生成方法

@@ -15,7 +15,7 @@ public class FoManagerService {
     FoManagerMapper foManagerMapper;
 
     /**
-    * 管理员登录，判断用户存在与验证密码
+    * 管理员登录，判断用户存在、验证密码、用户是否被锁定
     * */
     public FoManager loginAction(String username,String password) throws Exception{
         FoManager foManager = foManagerMapper.selectByUsername(username);
@@ -23,8 +23,17 @@ public class FoManagerService {
             throw new JsonException(JsonResultEnum.ADMIN_USER_NULL);
         }else if(!MD5Util.string2MD5(password).equals(foManager.getPassword())) {
             throw new JsonException(JsonResultEnum.ADMIN_PASS_ERROR);
+        }else if(foManager.getLocking() == 1){
+            throw new JsonException(JsonResultEnum.ADMIN_USER_LOCKING);
         }
         return foManager;
+    }
+
+    /**
+    * 编辑管理员用户信息
+    * */
+    public int updateByPrimaryKeySelective(FoManager foManager){
+        return foManagerMapper.updateByPrimaryKeySelective(foManager);
     }
 
 

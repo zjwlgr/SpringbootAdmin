@@ -7,7 +7,7 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="uname" property="uname" jdbcType="VARCHAR" />
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
-    <result column="locking" property="locking" jdbcType="BIT" />
+    <result column="locking" property="locking" jdbcType="INTEGER" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
     <result column="login_time" property="loginTime" jdbcType="INTEGER" />

@@ -11,7 +11,7 @@ public class FoManager {
 
     private Integer groupId;
 
-    private Boolean locking;
+    private Integer locking;
 
     private Integer number;
 
@@ -61,11 +61,11 @@ public class FoManager {
         this.groupId = groupId;
     }
 
-    public Boolean getLocking() {
+    public Integer getLocking() {
         return locking;
     }
 
-    public void setLocking(Boolean locking) {
+    public void setLocking(Integer locking) {
         this.locking = locking;
     }
 
