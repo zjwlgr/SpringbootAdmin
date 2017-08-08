@@ -58,10 +58,10 @@ public class LoginController {
         } else {
             //验证成功后返回用户信息对象
             FoManager foManager = foManagerService.loginAction(username,password);
+            //更新次数、ip、登录时间
             foManager.setLoginIp(AchieveUtil.getIpAddr(httpServletRequest));
             foManager.setNumber(foManager.getNumber() + 1);
             foManager.setLoginTime(AchieveUtil.getTimeStamp());
-            //更新次数、ip、登录时间
             foManagerService.updateByPrimaryKeySelective(foManager);
             //TODO 注册session，记录管理员登录信息
             return JsonResultUtil.success();
