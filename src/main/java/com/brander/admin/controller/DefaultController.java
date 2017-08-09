@@ -4,6 +4,7 @@ package com.brander.admin.controller;
  * 后台首页
  */
 
+import com.brander.common.domain.AdminTitle;
 import com.brander.common.utils.EnvServlet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,12 +33,17 @@ public class DefaultController {
         float fFreeMemory=(float)Runtime.getRuntime().freeMemory();
         float fTotalMemory=(float)Runtime.getRuntime().totalMemory();
         float fPercent=fFreeMemory/fTotalMemory*100;
+        /*页面标题设置*/
+        AdminTitle adminTitle = new AdminTitle();
+        adminTitle.setTitle1("系统信息查看");
+        adminTitle.setTitle2("探测");
         map.addAttribute("env",env);
         map.addAttribute("request",request);
         map.addAttribute("javalibrarypath",javalibrarypath);
         map.addAttribute("fFreeMemory",(int)(fFreeMemory/1024/1024));
         map.addAttribute("fTotalMemory",(int)(fTotalMemory/1024/1024));
         map.addAttribute("fPercent",(int)(fPercent));
+        map.addAttribute("adminTitle",adminTitle);
         return "admin/index/index";
     }
 }
