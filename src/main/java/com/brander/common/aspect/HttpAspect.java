@@ -1,16 +1,13 @@
 package com.brander.common.aspect;
 
-import com.brander.common.properties.MyConfigProperties;
-import org.aspectj.lang.JoinPoint;
+
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * @Aspect测试AOP面向切面
@@ -21,9 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component //把普通pojo实例化到spring容器中
 public class HttpAspect {
-
-    @Autowired
-    MyConfigProperties myConfigProperties;
 
     //Logger是Spring自带的一个日志框架
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
@@ -41,7 +35,7 @@ public class HttpAspect {
     * 以下 只匹配 com.brander.index.controller.IndexController类中的所有方法
     * */
     @Pointcut("execution(public * com.brander.admin.controller..*.*(..))")
-    public void log(){
+    public void admincheck(){
     }
 
     /*
@@ -49,7 +43,7 @@ public class HttpAspect {
     * 在运行Pointcut切点中类 之前 会调用该方法
     * @param JoinPoint 得到被执行的类。方法等  JoinPoint 记得先 import org.aspectj.lang.JoinPoint;
     * */
-    @Before("log()")
+    @Before("admincheck()")
     public void doBefore() throws Throwable {
 
     }
@@ -58,9 +52,8 @@ public class HttpAspect {
     * @After 在...之后...
     * 在运行Pointcut切点中类 之后 会调用该方法
     * */
-    @After("log()")
+    @After("admincheck()")
     public void  doAfter(){
-
         //logger.info("After");
     }
 
@@ -72,4 +65,10 @@ public class HttpAspect {
     public void doAfterReturning(Object object){
         logger.info("response={}",object.toString());
     }*/
+
+
+
+
+
+
 }

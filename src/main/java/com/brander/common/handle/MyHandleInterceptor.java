@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 创建一个拦截器，拦截Controller
@@ -18,8 +19,20 @@ public class MyHandleInterceptor implements HandlerInterceptor {
     * return false 将不会执行任何控制
     * */
     @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         //System.out.println("==preHandle:在Controller调用之前运行==" + o.getClass());
+        String uri = request.getRequestURI();
+        if(uri.indexOf("/admin/") != -1){//如果为后台页面
+            if(uri.indexOf("/admin/login") != -1 || uri.indexOf("/admin/kaptcha") != -1){
+                //如果不是后台登录页面或不是后台验证码页面
+            }else{
+                //判断后台是否有用户登录，没有登录跳转到登录页面
+                HttpSession session = request.getSession();
+                if(session.getAttribute("adminId") == null){
+                    response.sendRedirect("/admin/login");
+                }
+            }
+        }
         return true;
     }
 

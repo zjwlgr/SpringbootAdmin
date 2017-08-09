@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.brander.common.mapper.FoManagerRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.brander.common.domain.FoManagerRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="browser" property="browser" jdbcType="VARCHAR" />
+    <result column="system" property="system" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, username, uname, ip, time, browser, system
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fo_manager_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fo_manager_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.brander.common.domain.FoManagerRecord" >
+    insert into fo_manager_record (id, user_id, username, 
+      uname, ip, time, browser, 
+      system)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{uname,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, #{browser,jdbcType=VARCHAR}, 
+      #{system,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.brander.common.domain.FoManagerRecord" >
+    insert into fo_manager_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="browser != null" >
+        browser,
+      </if>
+      <if test="system != null" >
+        system,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="browser != null" >
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null" >
+        #{system,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.brander.common.domain.FoManagerRecord" >
+    update fo_manager_record
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="browser != null" >
+        browser = #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null" >
+        system = #{system,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.brander.common.domain.FoManagerRecord" >
+    update fo_manager_record
+    set user_id = #{userId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      time = #{time,jdbcType=INTEGER},
+      browser = #{browser,jdbcType=VARCHAR},
+      system = #{system,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

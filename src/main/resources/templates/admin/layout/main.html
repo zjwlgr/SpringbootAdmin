@@ -28,7 +28,7 @@
             <li id="header-user" class="dropdown">
                 <a class="dropdown-toggle" href="">
                     <span class="glyphicon glyphicon-user glyphicon-pos-2"></span>
-                    超级管理员 [ <span class="username">张健</span> ]
+                    超级管理员 [ <span class="username">[[${session.adminUname}]]</span> ]
                 </a>
             </li>
             <li id="header-message" class="dropdown">
@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li id="header-tasks" class="dropdown">
-                <a class="dropdown-toggle" href="/admin/login/loginout.html">
+                <a class="dropdown-toggle" th:href="@{/admin/loginout}">
                     <span class="glyphicon glyphicon-remove-circle glyphicon-pos-2"></span>
                     安全退出
                 </a>
@@ -102,7 +102,7 @@
                     <div class="row_hander">
                         <ol class="breadcrumb backbread">
                             <span class="glyphicon glyphicon-log-out myglyphicon"></span>
-                            <li class="active">后台管理系统</li>
+                            <li class="active">[[#{adminname}]]</li>
                             <li class="active">管理员管理</li>
                             <li class="active">新增</li>
                         </ol>
@@ -122,7 +122,7 @@
 </section>
 
 <footer class="bs-footer">
-    Copyright © 2016-2017 by MyDocument <a href="http://form1.cn" target="_blank">form1.cn</a>  All Rights Reserved. version 1.0
+    Copyright © 2017-[[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] by MyDocument <a th:href="'http://'+#{weburl}" target="_blank">[[#{weburl}]]</a>  All Rights Reserved. version [[#{version}]]
 </footer>
 </body>
 </html>

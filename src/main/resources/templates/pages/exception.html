@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Page Not Found</title>
+    <title>System error</title>
     <style>
         ::-moz-selection {
             background: #b3d4fc;
@@ -69,7 +69,7 @@
 </head>
 <body>
 <div class="container">
-    <h3>系统发生错误</h3>
+    <h1>System error</h1>
     <p th:text="'当前地址：'+${url}"></p>
     <p th:text="'错误信息：'+${exception.getMessage()}"></p>
 

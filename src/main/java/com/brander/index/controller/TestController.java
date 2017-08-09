@@ -42,4 +42,11 @@ public class TestController {
         return str + url + uri + param + method + serverip + servername;
     }
 
+
+    @GetMapping(value = "/test_sys")
+    @ResponseBody
+    public String test_sys(HttpServletRequest request) {
+        return "";
+    }
+
 }

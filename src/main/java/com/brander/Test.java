@@ -11,10 +11,8 @@ import java.util.Date;
 public class Test {
 
     public static void main(String args[]) {
-        Test test = new Test();
 
-        System.out.println(new Date().getTime());
-        System.out.println(System.currentTimeMillis()/1000);
+
 
     }
 

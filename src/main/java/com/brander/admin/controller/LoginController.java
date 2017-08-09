@@ -4,8 +4,8 @@ import com.brander.common.domain.FoManager;
 import com.brander.common.domain.JsonResult;
 import com.brander.common.enums.JsonResultEnum;
 import com.brander.common.exception.JsonException;
+import com.brander.common.service.FoManagerRecordService;
 import com.brander.common.service.FoManagerService;
-import com.brander.common.utils.AchieveUtil;
 import com.brander.common.utils.JsonResultUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.util.Date;
 
 /**
  * 管理员登录
@@ -29,6 +29,9 @@ public class LoginController {
 
     @Autowired
     FoManagerService foManagerService;
+
+    @Autowired
+    FoManagerRecordService foManagerRecordService;
 
     /**导入验证码配置类*/
     @Autowired
@@ -59,11 +62,15 @@ public class LoginController {
             //验证成功后返回用户信息对象
             FoManager foManager = foManagerService.loginAction(username,password);
             //更新次数、ip、登录时间
-            foManager.setLoginIp(AchieveUtil.getIpAddr(httpServletRequest));
-            foManager.setNumber(foManager.getNumber() + 1);
-            foManager.setLoginTime(AchieveUtil.getTimeStamp());
-            foManagerService.updateByPrimaryKeySelective(foManager);
-            //TODO 注册session，记录管理员登录信息
+            foManagerService.updateByPrimaryKeySelective(foManager,httpServletRequest);
+            //记录管理员登录日志信息
+            foManagerRecordService.insertSelective(foManager,httpServletRequest);
+            //注册session
+            HttpSession session = httpServletRequest.getSession();
+            session.setAttribute("adminId", foManager.getId());
+            session.setAttribute("adminUsername", foManager.getUsername());
+            session.setAttribute("adminUname", foManager.getUname());
+            session.setMaxInactiveInterval(1800);//设置生命周期为30分钟
             return JsonResultUtil.success();
         }
     }
@@ -98,6 +105,19 @@ public class LoginController {
         responseOutputStream.write(captchaChallengeAsJpeg);
         responseOutputStream.flush();
         responseOutputStream.close();
+    }
+
+    /**
+     * 管理员退出登录
+     * */
+    @GetMapping(value = "/loginout")
+    @ResponseBody
+    public void loginout(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        HttpSession session = request.getSession();
+        session.removeAttribute("adminId");
+        session.removeAttribute("adminUsername");
+        session.removeAttribute("adminUname");
+        response.sendRedirect("/admin/login");
     }
 
 }
