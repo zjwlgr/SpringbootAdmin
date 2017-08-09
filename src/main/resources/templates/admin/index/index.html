@@ -5,125 +5,148 @@
 
 <div class="bs-example" layout:fragment="content">
 
-    <div class="bs-hander">
-
-        <a href="/admin/manager/list.html" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 (4)</a>
-        <a href="/admin/manager/add.html" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
-
-        <div class="col-lg-3" style="float: right; padding-right: 0px; padding-left: 8px;">
-            <form id="form1_search" name="form1_search" method="get" action="">
-                <div class="input-group">
-                    <input type="text" id="search" name="search" class="form-control" placeholder="用户名/姓名" value="">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary" type="submit">Go!</button>
-                  </span>
-                </div>
-            </form>
-        </div>
-
-        <div class="dropdown" style="float: right;">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                选择分组查看                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/manager/list.html?groupid=1">超级管理员</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/manager/list.html?groupid=2">运营部</a></li>
-            </ul>
-        </div>
-
-    </div>
 
     <div class="bs-center">
 
+
         <table class="table table-bordered table-hover">
-            <thead>
-            <tr class="active">
-                <th width="5%">#</th>
-                <th width="10%">用户名</th>
-                <th width="9%">姓名</th>
-                <th width="11%">用户组</th>
-                <th width="6%">状态</th>
-                <th width="7%">登录次数</th>
-                <th width="10%">最后登录IP</th>
-                <th width="15%">最后登录时间</th>
-                <th width="8%">操作</th>
+            <tr><th>服务器参数</th></tr>
+            <tr>
+                <td>
+
+                    <table class="table table-bordered table-hover">
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td width="130">&nbsp;服务器名</td>
+                        <td colspan="3" height="22">&nbsp;[[${request.getServerName()}]]([[${request.getRemoteAddr()}]])</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td>&nbsp;服务器操作系统</td>
+                        <td colspan="3">&nbsp;[[${env.queryHashtable("os.name")}]] [[${env.queryHashtable("os.version")}]]
+                            [[${env.queryHashtable("sun.os.patch.level")}]]</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td>&nbsp;服务器操作系统类型</td>
+                        <td>&nbsp;[[${env.queryHashtable("os.arch")}]]</td>
+                        <td>&nbsp;服务器操作系统模式</td>
+                        <td>&nbsp;[[${env.queryHashtable("sun.arch.data.model")}]]位</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td>&nbsp;服务器所在地区</td>
+                        <td>&nbsp;[[${env.queryHashtable("user.country")}]]</td>
+                        <td>&nbsp;服务器语言</td>
+                        <td>&nbsp;[[${env.queryHashtable("user.language")}]]</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td>&nbsp;服务器时区</td>
+                        <td>&nbsp;[[${env.queryHashtable("user.timezone")}]]</td>
+                        <td>&nbsp;服务器时间</td>
+                        <td>&nbsp;[[${new java.util.Date()}]] </td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td>&nbsp;服务器解译引擎</td>
+                        <td width="170">&nbsp;[[${request.getServletContext().getServerInfo()}]]</td>
+                        <td width="130">&nbsp;服务器端口</td>
+                        <td width="170">&nbsp;[[${request.getServerPort()}]]</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td height="22">&nbsp;当前用户</td>
+                        <td height="22" colspan="3">&nbsp;[[${env.queryHashtable("user.name")}]]</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td>&nbsp;用户目录</td>
+                        <td colspan="3">&nbsp;[[${env.queryHashtable("user.dir")}]]</td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF" height="22">
+                        <td align=left bgcolor="#FFFFFF">&nbsp;本文件实际路径</td>
+                        <td height="8" colspan="3" bgcolor="#FFFFFF">&nbsp;[[${request.getRealPath(request.getServletPath())}]]</td>
+                    </tr>
+                </table>
+                </td>
             </tr>
-            </thead>
-            <tbody>
+        </table>
+    
+        <table class="table table-bordered table-hover">
+            <tr><th colspan="4">JAVA相关参数</th></tr>
 
             <tr>
-                <th scope="row">1</th>
-                <td>zjwlgr</td>
-                <td>张健</td>
                 <td>
-                    <strong>超级管理员</strong>                </td>
-                <td><span class="text-success">正常</span></td>
-                <td>214</td>
-                <td>117.107.204.225</td>
-                <td>
-                    2017-08-03 14:12:04                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2016-09-10 21:09:11"></span>
-                </td>
-                <td>
-                    <a href="/admin/manager/up.html?id=1">编辑</a> |
-                    <span class="text-muted">删除</span>                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>houjiandong</td>
-                <td>候建东</td>
-                <td>
-                    <strong>超级管理员</strong>                </td>
-                <td><span class="text-success">正常</span></td>
-                <td>18</td>
-                <td>123.118.208.210</td>
-                <td>
-                    2017-02-06 10:04:28                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2016-09-10 21:09:11"></span>
-                </td>
-                <td>
-                    <a href="/admin/manager/up.html?id=2">编辑</a> |
-                    <a href="/admin/manager/delete.html?id=2" class="delete" >删除</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">19</th>
-                <td>admin</td>
-                <td>admin</td>
-                <td>
-                    <strong>超级管理员</strong>                </td>
-                <td><span class="text-success">正常</span></td>
-                <td>2</td>
-                <td>127.0.0.1</td>
-                <td>
-                    2017-01-18 15:02:24                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2017-01-18 15:00:15"></span>
-                </td>
-                <td>
-                    <a href="/admin/manager/up.html?id=19">编辑</a> |
-                    <a href="/admin/manager/delete.html?id=19" class="delete" >删除</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">20</th>
-                <td>lwqbj</td>
-                <td>阿苏</td>
-                <td>
-                    <strong>超级管理员</strong>                </td>
-                <td><span class="text-success">正常</span></td>
-                <td>2</td>
-                <td>221.217.223.35</td>
-                <td>
-                    2017-02-14 16:08:52                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2017-02-14 16:08:04"></span>
-                </td>
-                <td>
-                    <a href="/admin/manager/up.html?id=20">编辑</a> |
-                    <a href="/admin/manager/delete.html?id=20" class="delete" >删除</a>
-                </td>
-            </tr>
+                    <table class="table table-bordered table-hover">
+                        <tr height="22">
+                            <td width="30%">&nbsp;名称</td>
+                            <td width="50%" height="22">&nbsp;英文名称</td>
+                            <td width="20%" height="22">&nbsp;版本</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;JAVA运行环境名称</td>
+                            <td width="50%" height="22">&nbsp;[[${env.queryHashtable("java.runtime.name")}]]</td>
+                            <td width="20%" height="22">&nbsp;[[${env.queryHashtable("java.runtime.version")}]]</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;JAVA运行环境说明书名称</td>
+                            <td width="50%" height="22">&nbsp;[[${env.queryHashtable("java.specification.name")}]]</td>
+                            <td width="20%" height="22">&nbsp;[[${env.queryHashtable("java.specification.version")}]]</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;JAVA虚拟机名称</td>
+                            <td width="50%" height="22">&nbsp;[[${env.queryHashtable("java.vm.name")}]]</td>
+                            <td width="20%" height="22">&nbsp;[[${env.queryHashtable("java.vm.version")}]]</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;JAVA虚拟机说明书名称</td>
+                            <td width="50%" height="22">&nbsp;[[${env.queryHashtable("java.vm.specification.name")}]]</td>
+                            <td width="20%" height="22">&nbsp;[[${env.queryHashtable("java.vm.specification.version")}]]</td>
+                        </tr>
 
-            </tbody>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td height="22">&nbsp;JAVA虚拟机剩余内存：</td>
+                            <td height="22" colspan="2">
+                                <div class="progress" style="margin-bottom: 0px;">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" th:style="'min-width: 2em; width: '+${fPercent}+'%;'">
+                                        [[${fFreeMemory}]]M
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td height="22">&nbsp;JAVA虚拟机分配内存</td>
+                            <td height="22" colspan="2">
+                                <div class="progress" style="margin-bottom: 0px;">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 85%;">
+                                    [[${fTotalMemory}]]M
+                                </div>
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-hover">
+                        <tr height="22">
+                            <td width="30%">&nbsp;参数名称</td>
+                            <td width="70%" height="22">&nbsp;参数路径</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;java.home</td>
+                            <td width="70%" height="22">&nbsp;[[${env.queryHashtable("java.home")}]]</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;java.endorsed.dirs</td>
+                            <td width="70%" height="22">&nbsp;[[${env.queryHashtable("java.endorsed.dirs")}]]</td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;java.library.path</td>
+                            <td width="70%" height="22" th:utext="${javalibrarypath}" style="padding-left: 13px;">
+                            </td>
+                        </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;java.io.tmpdir</td>
+                            <td width="70%" height="22">&nbsp;[[${env.queryHashtable("java.io.tmpdir")}]]</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
         </table>
 
 
-    </div>
+ </div>
 
 </div>
 </html>
