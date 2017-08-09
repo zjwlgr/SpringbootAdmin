@@ -140,6 +140,10 @@
                             <td width="30%">&nbsp;java.io.tmpdir</td>
                             <td width="70%" height="22">&nbsp;[[${env.queryHashtable("java.io.tmpdir")}]]</td>
                         </tr>
+                        <tr bgcolor="#FFFFFF" height="22">
+                            <td width="30%">&nbsp;java.class.path </td>
+                            <td width="70%" height="22" th:utext="${javaclasspath}" style="padding-left: 13px;"></td>
+                        </tr>
                     </table>
                 </td>
             </tr>

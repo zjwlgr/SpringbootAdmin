@@ -24,11 +24,16 @@ public class DefaultController {
         String action=new String(" ");
         String act=new String("action");
         if(request.getQueryString()!=null&&request.getQueryString().indexOf(act,0)>=0)action=request.getParameter(act);
-        /*让java.library.path换行输出*/
+        /*java.library.path换行输出*/
         String javalibrarypath = env.queryHashtable("java.library.path");
         javalibrarypath = javalibrarypath.replace(";;","<br />");
         javalibrarypath = javalibrarypath.replace(";",";<br />");
         javalibrarypath = javalibrarypath.replace(".","");
+        /*java.class.path换行输出*/
+        String javaclasspath = env.queryHashtable("java.class.path");
+        javaclasspath = javaclasspath.replace(";;","<br />");
+        javaclasspath = javaclasspath.replace(";",";<br />");
+        javaclasspath = javaclasspath.replace(".","");
         /*内存相关参数*/
         float fFreeMemory=(float)Runtime.getRuntime().freeMemory();
         float fTotalMemory=(float)Runtime.getRuntime().totalMemory();
@@ -40,6 +45,7 @@ public class DefaultController {
         map.addAttribute("env",env);
         map.addAttribute("request",request);
         map.addAttribute("javalibrarypath",javalibrarypath);
+        map.addAttribute("javaclasspath",javaclasspath);
         map.addAttribute("fFreeMemory",(int)(fFreeMemory/1024/1024));
         map.addAttribute("fTotalMemory",(int)(fTotalMemory/1024/1024));
         map.addAttribute("fPercent",(int)(fPercent));
