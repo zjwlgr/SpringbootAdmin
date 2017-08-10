@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+    <div class="bs-example">
+
+        <div class="bs-hander">
+
+            <a th:href="@{/admin/managerrecord/list}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 (161)</a>
+
+            <div class="col-lg-3" style="float: right; padding-right: 0px; padding-left: 8px;">
+                <form id="form1_search" name="form1_search" method="get" action="">
+                    <div class="input-group">
+                        <input type="text" id="search" name="search" class="form-control" placeholder="管理员用户名/姓名" value="">
+                        <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit">Go!</button>
+                  </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="bs-center">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr class="active">
+                    <th width="5%">#</th>
+                    <th width="10%">管理员用户名</th>
+                    <th width="9%">姓名</th>
+                    <th width="10%">登录IP</th>
+                    <th width="7%">登录次数</th>
+                    <th width="11%">使用系统</th>
+                    <th width="11%">使用浏览器</th>
+                    <th width="15%">登录时间</th>
+                    <th width="6%">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="vo:${foManagerRecord}">
+                    <th scope="row">[[${vo.getId()}]]</th>
+                    <td>[[${vo.getUsername()}]]</td>
+                    <td>[[${vo.getUname()}]]</td>
+                    <td>[[${vo.getIp()}]]</td>
+                    <td>[[${vo.getFoManager().getNumber()}]]</td>
+                    <td>[[${vo.getBrowser()}]]</td>
+                    <td>[[${vo.getSystem()}]]</td>
+                    <td th:text="${#dates.format(vo.getCtime(), 'yyyy-MM-dd hh:mm:ss')}"></td>
+                    <td>
+                        <a href="/admin/manager-record/delete.html?id=252" class="delete" >删除</a>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+
+            <ul class="pagination"><li class="prev disabled"><span>&laquo;</span></li>
+                <li class="active"><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=1" data-page="0">1</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=2" data-page="1">2</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=3" data-page="2">3</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=4" data-page="3">4</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=5" data-page="4">5</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=6" data-page="5">6</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=7" data-page="6">7</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=8" data-page="7">8</a></li>
+                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=9" data-page="8">9</a></li>
+                <li class="next"><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=2" data-page="1">&raquo;</a></li></ul>    </div>
+
+    </div>
+
+
+</div>
+</html>

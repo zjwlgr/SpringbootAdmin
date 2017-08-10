@@ -1,15 +1,19 @@
 package com.brander.admin.controller;
 
+import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoManager;
+import com.brander.common.domain.FoManagerGroup;
 import com.brander.common.domain.JsonResult;
 import com.brander.common.enums.JsonResultEnum;
 import com.brander.common.exception.JsonException;
+import com.brander.common.service.FoManagerGroupService;
 import com.brander.common.service.FoManagerRecordService;
 import com.brander.common.service.FoManagerService;
 import com.brander.common.utils.JsonResultUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -33,6 +37,9 @@ public class LoginController {
     @Autowired
     FoManagerRecordService foManagerRecordService;
 
+    @Autowired
+    FoManagerGroupService foManagerGroupService;
+
     /**导入验证码配置类*/
     @Autowired
     DefaultKaptcha defaultKaptcha;
@@ -41,7 +48,11 @@ public class LoginController {
     * 管理员登录页面
     * */
     @GetMapping(value = "/login")
-    public String login(){
+    public String login(ModelMap map){
+        /*页面标题设置*/
+        AdminTitle adminTitle = new AdminTitle();
+        adminTitle.setTitle1("入口");
+        map.addAttribute("adminTitle",adminTitle);
         return "admin/login/index";
     }
 
@@ -65,11 +76,14 @@ public class LoginController {
             foManagerService.updateByPrimaryKeySelective(foManager,httpServletRequest);
             //记录管理员登录日志信息
             foManagerRecordService.insertSelective(foManager,httpServletRequest);
+            //返回管理员用户组对象
+            FoManagerGroup foManagerGroup = foManagerGroupService.selectByPrimaryKey(foManager.getGroupId());
             //注册session
             HttpSession session = httpServletRequest.getSession();
             session.setAttribute("adminId", foManager.getId());
             session.setAttribute("adminUsername", foManager.getUsername());
             session.setAttribute("adminUname", foManager.getUname());
+            session.setAttribute("adminGroupname", foManagerGroup.getGname());
             session.setMaxInactiveInterval(1800);//设置生命周期为30分钟
             return JsonResultUtil.success();
         }
@@ -117,6 +131,7 @@ public class LoginController {
         session.removeAttribute("adminId");
         session.removeAttribute("adminUsername");
         session.removeAttribute("adminUname");
+        session.removeAttribute("adminGroupname");
         response.sendRedirect("/admin/login");
     }
 

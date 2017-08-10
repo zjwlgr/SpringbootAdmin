@@ -1,5 +1,7 @@
 package com.brander.common.domain;
 
+import java.util.Date;
+
 public class FoManager {
     private Integer id;
 
@@ -17,9 +19,9 @@ public class FoManager {
 
     private String loginIp;
 
-    private Integer loginTime;
+    private Date loginTime;
 
-    private Integer ctime;
+    private Date ctime;
 
     public Integer getId() {
         return id;
@@ -85,19 +87,19 @@ public class FoManager {
         this.loginIp = loginIp == null ? null : loginIp.trim();
     }
 
-    public Integer getLoginTime() {
+    public Date getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(Integer loginTime) {
+    public void setLoginTime(Date loginTime) {
         this.loginTime = loginTime;
     }
 
-    public Integer getCtime() {
+    public Date getCtime() {
         return ctime;
     }
 
-    public void setCtime(Integer ctime) {
+    public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
 

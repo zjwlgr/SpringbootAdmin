@@ -1,16 +1,22 @@
 package com.brander.common.handle;
 
+import com.brander.common.domain.FoFunction;
 import com.brander.common.domain.JsonResult;
 import com.brander.common.exception.JsonException;
+import com.brander.common.service.FoFunctionService;
 import com.brander.common.utils.JsonResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 异常捕获处理类
@@ -19,12 +25,12 @@ import javax.servlet.http.HttpServletRequest;
 // 主要是用来Controller的一些公共的需求的低侵入性增强提供辅助，
 // 作用于@RequestMapping标注的方法上。
 @ControllerAdvice
-public class ExceptionHandle {
+public class MyControllerAdvice {
 
     //Logger是Spring自带的一个日志框架
-    private final static Logger logger = LoggerFactory.getLogger(ExceptionHandle.class);
+    private final static Logger logger = LoggerFactory.getLogger(MyControllerAdvice.class);
 
-    /*
+    /**
     * 只处理自定义的异常JsonException
     * */
     @ExceptionHandler(value = JsonException.class)
@@ -34,7 +40,7 @@ public class ExceptionHandle {
         return JsonResultUtil.error(JsonException.getCode(), JsonException.getMessage());
     }
 
-    /*
+    /**
     * 处理所有异常Exception
     * */
     @ExceptionHandler(value = Exception.class)
@@ -46,18 +52,67 @@ public class ExceptionHandle {
         return mav;
     }
 
+    @Autowired
+    FoFunctionService foFunctionService;
 
-
-    /*@ModelAttribute
-    public User newUser() {
-        System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前把返回值放入Model");
-        return new User();
+    //应用到所有@RequestMapping注解方法，在其执行之前把返回值放入Model
+    @ModelAttribute
+    public void adminLeftList(HttpServletRequest request, ModelMap map) {
+        String uri = request.getRequestURI();
+        if(uri.indexOf("/admin/") != -1){//如果为后台页面
+            if(uri.indexOf("/admin/login") != -1 || uri.indexOf("/admin/kaptcha") != -1){
+                //如果是后台登录页面或是后台验证码页面，不作任何处理
+            }else{
+                //返回后台左侧功能列表
+                List<FoFunction> foList = foFunctionService.selectByfid(0);
+                for(FoFunction fo : foList){
+                    List<FoFunction> cList = foFunctionService.selectByfid(fo.getId());
+                    fo.setClist(cList);
+                }
+                map.addAttribute("leftList",foList);
+            }
+        }
     }
 
-    @InitBinder
+    //应用到所有@RequestMapping注解方法，在其执行之前把返回值放入Model
+    /*@ModelAttribute
+    public String newUsers(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+        System.out.println(uri);
+        return "dfdsf";
+    }*/
+
+    /*@InitBinder
     public void initBinder(WebDataBinder binder) {
         System.out.println("============应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器");
     }  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

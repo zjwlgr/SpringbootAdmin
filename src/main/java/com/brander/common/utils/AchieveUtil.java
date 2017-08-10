@@ -1,6 +1,7 @@
 package com.brander.common.utils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -117,22 +118,24 @@ public class AchieveUtil {
      * 获取当前时间戳
      * @return Integer 转int类型的时间戳
      * */
-    public static Integer getTimeStamp(){
+    public static long getTimeStamp(){
         long timeStamp = System.currentTimeMillis(); //或者 new Date().getTime();
-        timeStamp = timeStamp / 1000;//去掉毫秒
-        return (int)timeStamp;//返回int类型
+        //timeStamp = timeStamp / 1000;//去掉毫秒
+        return timeStamp;
     }
 
     /**
      * 获取当前时间
      * @return String 字符串时间
      * */
-    public static String getTime(String pattern){
+    public static Date getDateTime(String pattern){
         if(pattern == null || pattern.length() == 0){
             pattern = "yyyy-MM-dd HH:mm:ss";
         }
-        SimpleDateFormat df = new SimpleDateFormat(pattern);//设置日期格式
-        String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);//设置日期格式
+        String strDate = sdf.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
+        ParsePosition pos = new ParsePosition(0);
+        Date date = sdf.parse(strDate,pos);
         return date;
     }
 

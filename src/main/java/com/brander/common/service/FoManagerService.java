@@ -38,7 +38,7 @@ public class FoManagerService {
     public int updateByPrimaryKeySelective(FoManager foManager, HttpServletRequest request){
         foManager.setLoginIp(AchieveUtil.getIpAddr(request));
         foManager.setNumber(foManager.getNumber() + 1);
-        foManager.setLoginTime(AchieveUtil.getTimeStamp());
+        foManager.setLoginTime(AchieveUtil.getDateTime(""));
         return foManagerMapper.updateByPrimaryKeySelective(foManager);
     }
 

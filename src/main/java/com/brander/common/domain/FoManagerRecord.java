@@ -1,5 +1,7 @@
 package com.brander.common.domain;
 
+import java.util.Date;
+
 public class FoManagerRecord {
     private Integer id;
 
@@ -11,11 +13,13 @@ public class FoManagerRecord {
 
     private String ip;
 
-    private Integer time;
+    private Date ctime;
 
     private String browser;
 
     private String system;
+
+    private FoManager foManager;
 
     public Integer getId() {
         return id;
@@ -57,12 +61,12 @@ public class FoManagerRecord {
         this.ip = ip == null ? null : ip.trim();
     }
 
-    public Integer getTime() {
-        return time;
+    public Date getCtime() {
+        return ctime;
     }
 
-    public void setTime(Integer time) {
-        this.time = time;
+    public void setCtime(Date ctime) {
+        this.ctime = ctime;
     }
 
     public String getBrowser() {
@@ -79,5 +83,13 @@ public class FoManagerRecord {
 
     public void setSystem(String system) {
         this.system = system == null ? null : system.trim();
+    }
+
+    public FoManager getFoManager() {
+        return foManager;
+    }
+
+    public void setFoManager(FoManager foManager) {
+        this.foManager = foManager;
     }
 }

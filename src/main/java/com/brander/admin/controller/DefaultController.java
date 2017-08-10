@@ -41,7 +41,6 @@ public class DefaultController {
         /*页面标题设置*/
         AdminTitle adminTitle = new AdminTitle();
         adminTitle.setTitle1("系统信息查看");
-        adminTitle.setTitle2("探测");
         map.addAttribute("env",env);
         map.addAttribute("request",request);
         map.addAttribute("javalibrarypath",javalibrarypath);

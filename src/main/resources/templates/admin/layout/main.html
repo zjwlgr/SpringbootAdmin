@@ -2,7 +2,6 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="admin/layout/head :: head"></head>
 <body>
-
 <header id="header" class="navbar">
     <div class="container-fluid">
         <div class="navbar-brand">
@@ -28,7 +27,7 @@
             <li id="header-user" class="dropdown">
                 <a class="dropdown-toggle" href="">
                     <span class="glyphicon glyphicon-user glyphicon-pos-2"></span>
-                    超级管理员 [ <span class="username">[[${session.adminUname}]]</span> ]
+                    [[${session.adminGroupname}]] [ <span class="username">[[${session.adminUname}]]</span> ]
                 </a>
             </li>
             <li id="header-message" class="dropdown">
@@ -62,29 +61,16 @@
 
             <ul id="left_ajax">
 
-                <li class="has-sub">
-                    <a href="javascript:void(0);" class="offsite" id="has_12">
+                <li class="has-sub" th:each="vo:${leftList}">
+                    <a href="javascript:void(0);" class="offsite" th:id="'has_'+${vo.getId()}">
                         <i class="glyphicon glyphicon-th-large"></i>
-                        <span class="menu-text">系统常规功能</span>
+                        <span class="menu-text">[[${vo.getFname()}]]</span>
                         <span class="glyphicon glyphicon-triangle-left arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a href="/admin/index/default.html">系统信息查看</a></li>
-                        <li><a href="/admin/manager-record/list.html">管理员登录日志</a></li>
-                        <li><a href="/admin/manager/list.html">管理员管理</a></li>
-                        <li><a href="/admin/manager-group/list.html">管理员分组管理</a></li>
-                        <li><a href="/admin/function/list.html">系统功能管理</a></li>
-                        <li><a href="/admin/class/index.html">系统分类管理</a></li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:void(0);" class="offsite" id="has_14">
-                        <i class="glyphicon glyphicon-th-large"></i>
-                        <span class="menu-text">信息系统管理</span>
-                        <span class="glyphicon glyphicon-triangle-left arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="/admin/article/list.html">技术文章管理</a></li>
+                        <li th:each="vov:${vo.getClist()}">
+                            <a th:href="${vov.getFuri()}">[[${vov.getFname()}]]</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -104,7 +90,8 @@
                             <span class="glyphicon glyphicon-log-out myglyphicon"></span>
                             <li class="active">[[#{adminname}]]</li>
                             <li class="active">[[${adminTitle.getTitle1()}]]</li>
-                            <li class="active">[[${adminTitle.getTitle2()}]]</li>
+                            <li class="active" th:if="${adminTitle.getTitle2()} != null">[[${adminTitle.getTitle2()}]]</li>
+
                         </ol>
                     </div>
 

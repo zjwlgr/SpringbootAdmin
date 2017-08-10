@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * 测试类
@@ -32,7 +33,7 @@ public class TestController {
     @GetMapping(value = "/test_system")
     @ResponseBody
     public String test_system(HttpServletRequest request){
-        String str = AchieveUtil.getTime("yyyy-MM-dd HH:mm:ss");
+        Date str = AchieveUtil.getDateTime("yyyy-MM-dd HH:mm:ss");
         String url = AchieveUtil.getUrl(request);
         String uri = AchieveUtil.getUri(request);
         String param = AchieveUtil.getParam(request);

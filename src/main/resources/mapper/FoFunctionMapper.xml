@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.brander.common.mapper.FoFunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.brander.common.domain.FoFunction" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="furi" property="furi" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="candel" property="candel" jdbcType="BIT" />
+    <result column="state" property="state" jdbcType="BIT" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fid, fname, furi, sort, candel, state, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fo_function
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--根据fid返回对应功能列表-->
+  <select id="selectByfid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_function
+    where state = 0 and fid=#{fid}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fo_function
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.brander.common.domain.FoFunction" >
+    insert into fo_function (id, fid, fname, 
+      furi, sort, candel, state, 
+      ctime)
+    values (#{id,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, 
+      #{furi,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{candel,jdbcType=BIT}, #{state,jdbcType=BIT}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.brander.common.domain.FoFunction" >
+    insert into fo_function
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="furi != null" >
+        furi,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="candel != null" >
+        candel,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="furi != null" >
+        #{furi,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="candel != null" >
+        #{candel,jdbcType=BIT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.brander.common.domain.FoFunction" >
+    update fo_function
+    <set >
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="furi != null" >
+        furi = #{furi,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="candel != null" >
+        candel = #{candel,jdbcType=BIT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.brander.common.domain.FoFunction" >
+    update fo_function
+    set fid = #{fid,jdbcType=INTEGER},
+      fname = #{fname,jdbcType=VARCHAR},
+      furi = #{furi,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      candel = #{candel,jdbcType=BIT},
+      state = #{state,jdbcType=BIT},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

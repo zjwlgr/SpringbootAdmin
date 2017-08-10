@@ -41,7 +41,7 @@
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名，这里举例，只配置了一个table，你可以配置多个-->
 
-        <table tableName="fo_manager_record" domainObjectName="FoManagerRecord"
+        <table tableName="fo_manager_record" domainObjectName="ddddddddd"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

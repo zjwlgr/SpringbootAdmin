@@ -24,7 +24,7 @@ public class MyHandleInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         if(uri.indexOf("/admin/") != -1){//如果为后台页面
             if(uri.indexOf("/admin/login") != -1 || uri.indexOf("/admin/kaptcha") != -1){
-                //如果不是后台登录页面或不是后台验证码页面
+                //如果是后台登录页面或是后台验证码页面，不作任何处理
             }else{
                 //判断后台是否有用户登录，没有登录跳转到登录页面
                 HttpSession session = request.getSession();

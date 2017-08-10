@@ -10,8 +10,8 @@
     <result column="locking" property="locking" jdbcType="INTEGER" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
-    <result column="login_time" property="loginTime" jdbcType="INTEGER" />
-    <result column="ctime" property="ctime" jdbcType="INTEGER" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, username, password, uname, group_id, locking, number, login_ip, login_time, ctime
@@ -42,8 +42,8 @@
       ctime)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{uname,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}, #{locking,jdbcType=BIT}, 
-      #{number,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=INTEGER}, 
-      #{ctime,jdbcType=INTEGER})
+      #{number,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{ctime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.brander.common.domain.FoManager" >
     insert into fo_manager
@@ -105,10 +105,10 @@
         #{loginIp,jdbcType=VARCHAR},
       </if>
       <if test="loginTime != null" >
-        #{loginTime,jdbcType=INTEGER},
+        #{loginTime,jdbcType=TIMESTAMP},
       </if>
       <if test="ctime != null" >
-        #{ctime,jdbcType=INTEGER},
+        #{ctime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -137,10 +137,10 @@
         login_ip = #{loginIp,jdbcType=VARCHAR},
       </if>
       <if test="loginTime != null" >
-        login_time = #{loginTime,jdbcType=INTEGER},
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
       </if>
       <if test="ctime != null" >
-        ctime = #{ctime,jdbcType=INTEGER},
+        ctime = #{ctime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -154,8 +154,8 @@
       locking = #{locking,jdbcType=BIT},
       number = #{number,jdbcType=INTEGER},
       login_ip = #{loginIp,jdbcType=VARCHAR},
-      login_time = #{loginTime,jdbcType=INTEGER},
-      ctime = #{ctime,jdbcType=INTEGER}
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

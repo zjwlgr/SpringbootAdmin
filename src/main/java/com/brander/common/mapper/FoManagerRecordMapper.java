@@ -2,6 +2,8 @@ package com.brander.common.mapper;
 
 import com.brander.common.domain.FoManagerRecord;
 
+import java.util.List;
+
 public interface FoManagerRecordMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface FoManagerRecordMapper {
     int updateByPrimaryKeySelective(FoManagerRecord record);
 
     int updateByPrimaryKey(FoManagerRecord record);
+
+    List<FoManagerRecord> selectJoinFoManager();
 }
