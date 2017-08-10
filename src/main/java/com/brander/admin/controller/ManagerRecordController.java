@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -30,13 +31,16 @@ public class ManagerRecordController {
     * */
     @GetMapping(value = "/managerrecord/list")
     public String managerRecordList(ModelMap map,
-                                    @RequestParam(value = "search", required = false) String search){
+                                    @RequestParam(value = "search", required = false) String search,
+                                    HttpServletRequest request){
 
         AdminTitle adminTitle = new AdminTitle();
         adminTitle.setTitle1("管理员登录日志");adminTitle.setTitle2("列表");
         map.addAttribute("adminTitle",adminTitle);
 
-        List<FoManagerRecord> foManagerRecord = foManagerRecordService.selectJoinFoManager(search);
+        int pageNum = Integer.parseInt(request.getParameter("page"));
+        int pageSize = 4;
+        List<FoManagerRecord> foManagerRecord = foManagerRecordService.selectJoinFoManager(search,pageNum,pageSize);
         map.addAttribute("foManagerRecord",foManagerRecord);
 
         return "admin/managerrecord/list";

@@ -4,6 +4,7 @@ import com.brander.common.domain.FoManager;
 import com.brander.common.domain.FoManagerRecord;
 import com.brander.common.mapper.FoManagerRecordMapper;
 import com.brander.common.utils.AchieveUtil;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,11 @@ public class FoManagerRecordService {
     /**
      * 管理员日志列表
      * */
-    public List<FoManagerRecord> selectJoinFoManager(String search){
+    public List<FoManagerRecord> selectJoinFoManager(String search,int pageNum,int pageSize){
+        if(pageNum != 0 && pageSize != 0){
+            PageHelper.startPage(pageNum, pageSize);
+        }
+
         return foManagerRecordMapper.selectJoinFoManager(search);
     }
 
