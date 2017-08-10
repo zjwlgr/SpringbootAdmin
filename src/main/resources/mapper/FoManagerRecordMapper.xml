@@ -39,11 +39,14 @@
   </select>
 
   <!--多表fo_manager查询-->
-  <select id="selectJoinFoManager" resultMap="JoinFoManagerMap" parameterType="java.lang.Integer" >
+  <select id="selectJoinFoManager" resultMap="JoinFoManagerMap" parameterType="java.lang.String" >
     SELECT a.id,a.user_id,a.username,a.uname,a.ip,a.ctime,a.browser,a.system,b.number
     FROM `fo_manager_record` a
     LEFT JOIN fo_manager b
     ON a.user_id=b.id
+    <if test="search != null">
+    WHERE a.username LIKE CONCAT(CONCAT('%', #{search}),'%') OR a.uname LIKE  CONCAT(CONCAT('%', #{search}),'%')
+    </if>
     ORDER BY a.id desc
   </select>
 
