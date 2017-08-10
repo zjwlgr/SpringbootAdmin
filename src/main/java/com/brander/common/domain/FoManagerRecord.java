@@ -2,7 +2,7 @@ package com.brander.common.domain;
 
 import java.util.Date;
 
-public class FoManagerRecord {
+public class FoManagerRecord extends Page {
     private Integer id;
 
     private Integer userId;
@@ -20,6 +20,8 @@ public class FoManagerRecord {
     private String system;
 
     private FoManager foManager;
+
+    private String search;
 
     public Integer getId() {
         return id;
@@ -91,5 +93,13 @@ public class FoManagerRecord {
 
     public void setFoManager(FoManager foManager) {
         this.foManager = foManager;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }

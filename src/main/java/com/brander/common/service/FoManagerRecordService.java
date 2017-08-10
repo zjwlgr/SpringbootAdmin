@@ -36,12 +36,18 @@ public class FoManagerRecordService {
     /**
      * 管理员日志列表
      * */
-    public List<FoManagerRecord> selectJoinFoManager(String search,int pageNum,int pageSize){
-        if(pageNum != 0 && pageSize != 0){
-            PageHelper.startPage(pageNum, pageSize);
+    public List<FoManagerRecord> selectJoinFoManager(FoManagerRecord foManagerRecord){
+        if (foManagerRecord.getPage() != null && foManagerRecord.getRows() != null) {
+            PageHelper.startPage(foManagerRecord.getPage(), foManagerRecord.getRows());
         }
+        return foManagerRecordMapper.selectJoinFoManager(foManagerRecord.getSearch());
+    }
 
-        return foManagerRecordMapper.selectJoinFoManager(search);
+    /**
+     * 管理员日志删除
+     * */
+    public int deleteByPrimaryKey(FoManagerRecord foManagerRecord){
+        return foManagerRecordMapper.deleteByPrimaryKey(foManagerRecord.getId());
     }
 
 }

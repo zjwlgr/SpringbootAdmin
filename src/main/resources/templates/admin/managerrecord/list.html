@@ -9,7 +9,7 @@
 
         <div class="bs-hander">
 
-            <a th:href="@{/admin/managerrecord/list}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 (161)</a>
+            <a th:href="@{/admin/managerrecord/list}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 ([[${pageInfo.total}]])</a>
 
             <div class="col-lg-3" style="float: right; padding-right: 0px; padding-left: 8px;">
                 <form id="form1_search" name="form1_search" method="get" action="">
@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
 
-                <tr th:each="vo:${foManagerRecord}">
+                <tr th:each="vo:${pageInfo.list}">
                     <th scope="row">[[${vo.getId()}]]</th>
                     <td>[[${vo.getUsername()}]]</td>
                     <td>[[${vo.getUname()}]]</td>
@@ -52,7 +52,7 @@
                     <td>[[${vo.getSystem()}]]</td>
                     <td th:text="${#dates.format(vo.getCtime(), 'yyyy-MM-dd hh:mm:ss')}"></td>
                     <td>
-                        <a href="/admin/manager-record/delete.html?id=252" class="delete" >删除</a>
+                        <a th:href="'/admin/managerrecord/delete?id='+${vo.getId()}" class="delete" >删除</a>
                     </td>
                 </tr>
 
@@ -61,17 +61,32 @@
             </table>
 
 
-            <ul class="pagination"><li class="prev disabled"><span>&laquo;</span></li>
-                <li class="active"><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=1" data-page="0">1</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=2" data-page="1">2</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=3" data-page="2">3</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=4" data-page="3">4</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=5" data-page="4">5</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=6" data-page="5">6</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=7" data-page="6">7</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=8" data-page="7">8</a></li>
-                <li><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=9" data-page="8">9</a></li>
-                <li class="next"><a href="/admin/manager-record/list.html?s=%2Fadmin%2Fmanager-record%2Flist.html&amp;page=2" data-page="1">&raquo;</a></li></ul>    </div>
+        <ul class="pagination">
+            <li>
+                <a th:href="'?page=1'">首页</a>
+            </li>
+            <li th:class="${pageInfo.hasPreviousPage}? '' : 'disabled'">
+                <a th:href="'?page='+${pageInfo.prePage}" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                </a>
+            </li>
+            <li th:each="nav : ${pageInfo.navigatepageNums}" th:class="${nav != pageInfo.pageNum}? '' : 'active'">
+                <a th:href="'?page='+${nav}" th:text="${nav}" th:if="${nav == pageInfo.pageNum}">
+                    <span class="sr-only">(current)</span>
+                </a>
+                <a th:href="'?page='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+            </li>
+            <li th:class="${pageInfo.hasNextPage}? '' : 'disabled'">
+                <a th:href="'?page='+${pageInfo.nextPage}" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="'?page='+${pageInfo.pages}" th:text="'共 '+${pageInfo.pages}+' 页'"></a>
+            </li>
+        </ul>
+
+        </div>
 
     </div>
 

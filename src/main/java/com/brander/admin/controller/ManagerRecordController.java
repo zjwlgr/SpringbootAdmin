@@ -4,6 +4,7 @@ import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoManagerRecord;
 import com.brander.common.service.FoManagerRecordService;
 import com.brander.common.utils.AchieveUtil;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -30,20 +32,26 @@ public class ManagerRecordController {
     * 管理员登录日志列表页面
     * */
     @GetMapping(value = "/managerrecord/list")
-    public String managerRecordList(ModelMap map,
-                                    @RequestParam(value = "search", required = false) String search,
-                                    HttpServletRequest request){
+    public String managerRecordList(ModelMap map,FoManagerRecord fmr){
 
         AdminTitle adminTitle = new AdminTitle();
         adminTitle.setTitle1("管理员登录日志");adminTitle.setTitle2("列表");
         map.addAttribute("adminTitle",adminTitle);
 
-        int pageNum = Integer.parseInt(request.getParameter("page"));
-        int pageSize = 4;
-        List<FoManagerRecord> foManagerRecord = foManagerRecordService.selectJoinFoManager(search,pageNum,pageSize);
-        map.addAttribute("foManagerRecord",foManagerRecord);
+        List<FoManagerRecord> foManagerRecord = foManagerRecordService.selectJoinFoManager(fmr);
+        map.addAttribute("pageInfo",new PageInfo<FoManagerRecord>(foManagerRecord));
 
         return "admin/managerrecord/list";
+    }
+
+    /**
+     * 删除管理员登录日志
+     * */
+    @GetMapping(value = "/managerrecord/delete")
+    @ResponseBody
+    public void managerRecordDelete(FoManagerRecord foManagerRecord, HttpServletResponse response) throws Exception{
+        foManagerRecordService.deleteByPrimaryKey(foManagerRecord);
+        response.sendRedirect("/admin/managerrecord/list");
     }
 
 
