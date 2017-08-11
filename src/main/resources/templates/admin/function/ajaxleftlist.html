@@ -1,0 +1,22 @@
+<li class="has-sub open" th:each="vo:${leftList}" th:if="${leftList} != null">
+    <a href="javascript:void(0);" class="offsite" th:id="'has_'+${vo.getId()}">
+        <i class="glyphicon glyphicon-th-large"></i>
+        <span class="menu-text">[[${vo.getFname()}]]</span>
+        <span class="glyphicon glyphicon-triangle-bottom arrow"></span>
+    </a>
+    <ul class="sub" style="display: block">
+        <li th:each="vov:${vo.getClist()}">
+            <a th:href="${vov.getFuri()}" th:text="${vov.fname}" class="js_replace"></a>
+        </li>
+    </ul>
+</li>
+<p class="text-warning" style="padding-left: 13px; font-size: 13px; padding-top: 10px;" th:if="${leftList} == null">Sorry nothing was found.</p>
+<script type="text/javascript">
+    $(function () {
+        $(".js_replace").each(function(){
+            var String = $(this).html();
+            String = String.replace('[[${search}]]','<span class="text-primary" style="font-weight: bold;">[[${search}]]</span>');
+            $(this).html(String);
+        });
+    });
+</script>

@@ -64,10 +64,9 @@ public class MyControllerAdvice {
                 //如果是后台登录页面或是后台验证码页面，不作任何处理
             }else{
                 //返回后台左侧功能列表
-                List<FoFunction> foList = foFunctionService.selectByfid(0);
+                List<FoFunction> foList = foFunctionService.selectByfid(0,true,null,null);
                 for(FoFunction fo : foList){
-                    List<FoFunction> cList = foFunctionService.selectByfid(fo.getId());
-                    fo.setClist(cList);
+                    fo.setClist(foFunctionService.selectByfid(fo.getId(),true,null,null));
                 }
                 map.addAttribute("leftList",foList);
             }

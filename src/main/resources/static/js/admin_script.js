@@ -246,7 +246,7 @@ $(function(){
         if($("#left_hidden_search").val() != $val) {//如果框中值无变化 不操作
             $("#search_loader img").show();
             $("#search_loader").removeClass('glyphicon-search');
-            $.post($("#left_hidden_url").val(), {search: $val, _csrf: $csrf}, function (data) {
+            $.post($("#left_hidden_url").val(), {search: $val}, function (data) {
                 if($val == ''){//如果清空了搜索把左侧列表放回原处
                     $("#left_ajax").html($("#left_hidden").val());
                 }else {

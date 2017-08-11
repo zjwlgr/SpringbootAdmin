@@ -26,7 +26,42 @@
     select
     <include refid="Base_Column_List" />
     from fo_function
-    where state = 0 and fid=#{fid}
+    where fid = #{arg0}
+    <if test="arg1 == true">
+      AND state = 0
+    </if>
+    <if test="arg2 != null">
+      AND id in
+      <foreach  item="item" collection="arg2" index="index"  open="(" separator="," close=")">
+        #{item.id}
+      </foreach>
+    </if>
+    <if test="arg3 != null">
+      AND id in
+      <foreach  item="item" collection="arg3" index="index"  open="(" separator="," close=")">
+        #{item.fid}
+      </foreach>
+    </if>
+  </select>
+
+  <!--根据关键字like查询 @ 搜索子功能（fid<>0 为子功能） 根据关键字-->
+  <select id="selectByfnameLike" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    id
+    from fo_function
+    where fid != 0 and fname LIKE CONCAT(CONCAT('%', #{search}),'%')
+  </select>
+
+  <!--通过子功能ID，查询父功能ID，ID-->
+  <select id="selectByinchildId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    fid
+    from fo_function
+    where id IN
+    <foreach  item="item" collection="cctList" index="index"  open="(" separator="," close=")">
+      #{item.id}
+    </foreach>
+    GROUP BY fid
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
