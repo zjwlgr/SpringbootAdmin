@@ -18,9 +18,12 @@ public class PageUtil {
         String getUri = request.getRequestURI();//获取pathinfo
         String getParam = request.getQueryString();//获取？后面参数
         String newParam = "";
-        if(getParam != null && getParam.indexOf("&") != -1){
+        if(getParam != null){
             //获取参数后，取掉分页的page=2参数重新返回
-            newParam = "&"+getParam.replaceAll("page=(\\d*)&", "");
+            newParam = getParam.replaceAll("page=(\\d*)", "");
+            if(!(newParam.indexOf("&") != -1)){
+                newParam = "&" + newParam;
+            }
         }
         page = page <= 0 ? 1 : page;
         String pageurl = getUri+"?page=" + page + newParam;
