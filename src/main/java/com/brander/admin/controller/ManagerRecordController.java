@@ -4,6 +4,7 @@ import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoManagerRecord;
 import com.brander.common.service.FoManagerRecordService;
 import com.brander.common.utils.AchieveUtil;
+import com.brander.common.utils.PageUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,14 +33,16 @@ public class ManagerRecordController {
     * 管理员登录日志列表页面
     * */
     @GetMapping(value = "/managerrecord/list")
-    public String managerRecordList(ModelMap map,FoManagerRecord fmr){
+    public String managerRecordList(ModelMap map,FoManagerRecord fmr,HttpServletRequest request){
 
         AdminTitle adminTitle = new AdminTitle();
         adminTitle.setTitle1("管理员登录日志");adminTitle.setTitle2("列表");
         map.addAttribute("adminTitle",adminTitle);
 
         List<FoManagerRecord> foManagerRecord = foManagerRecordService.selectJoinFoManager(fmr);
-        map.addAttribute("pageInfo",new PageInfo<FoManagerRecord>(foManagerRecord));
+        PageInfo pageInfo = new PageInfo<FoManagerRecord>(foManagerRecord);
+        map.addAttribute("pageInfo",pageInfo);
+        map.addAttribute("pageshow", PageUtil.show(pageInfo,request));
 
         return "admin/managerrecord/list";
     }
