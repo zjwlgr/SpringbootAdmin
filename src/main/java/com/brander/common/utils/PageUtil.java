@@ -79,3 +79,30 @@ public class PageUtil {
     }
 }
 
+/*只使用html如下：*/
+/*<ul class="pagination">
+	<li>
+		<a th:href="'?page=1'">首页</a>
+	</li>
+	<li th:class="${pageInfo.hasPreviousPage}? '' : 'disabled'">
+		<a th:href="'?page='+${pageInfo.prePage}" aria-label="Previous">
+			<span aria-hidden="true">«</span>
+		</a>
+	</li>
+
+	<li th:each="nav : ${pageInfo.navigatepageNums}" th:class="${nav != pageInfo.pageNum}? '' : 'active'">
+		<a th:href="'?page='+${nav}" th:text="${nav}" th:if="${nav == pageInfo.pageNum}">
+			<span class="sr-only">(current)</span>
+		</a>
+		<a th:href="'?page='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+	</li>
+
+	<li th:class="${pageInfo.hasNextPage}? '' : 'disabled'">
+		<a th:href="'?page='+${pageInfo.nextPage}" aria-label="Next">
+			<span aria-hidden="true">»</span>
+		</a>
+	</li>
+	<li>
+		<a th:href="'?page='+${pageInfo.pages}" th:text="'共 '+${pageInfo.pages}+' 页'"></a>
+	</li>
+</ul>*/

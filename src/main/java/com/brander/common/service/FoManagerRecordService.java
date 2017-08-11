@@ -37,7 +37,6 @@ public class FoManagerRecordService {
      * 管理员日志列表
      * */
     public List<FoManagerRecord> selectJoinFoManager(FoManagerRecord foManagerRecord){
-        foManagerRecord.setRows(4);
         if (foManagerRecord.getPage() != null && foManagerRecord.getRows() != null) {
             PageHelper.startPage(foManagerRecord.getPage(), foManagerRecord.getRows());
         }

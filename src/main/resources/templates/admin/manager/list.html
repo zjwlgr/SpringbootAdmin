@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+
+    <div class="bs-hander">
+
+        <a href="/admin/manager/list.html" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 (4)</a>
+        <a href="/admin/manager/add.html" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
+
+        <div class="col-lg-3" style="float: right; padding-right: 0px; padding-left: 8px;">
+            <form id="form1_search" name="form1_search" method="get" action="">
+                <div class="input-group">
+                    <input type="text" id="search" name="search" class="form-control" placeholder="用户名/姓名" value="">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit">Go!</button>
+                  </span>
+                </div>
+            </form>
+        </div>
+
+        <div class="dropdown" style="float: right;">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                选择分组查看                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/manager/list.html?groupid=1">超级管理员</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/manager/list.html?groupid=2">运营部</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="bs-center">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr class="active">
+                <th width="5%">#</th>
+                <th width="10%">用户名</th>
+                <th width="9%">姓名</th>
+                <th width="11%">用户组</th>
+                <th width="6%">状态</th>
+                <th width="7%">登录次数</th>
+                <th width="10%">最后登录IP</th>
+                <th width="15%">最后登录时间</th>
+                <th width="8%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <th scope="row">1</th>
+                <td>zjwlgr</td>
+                <td>张健</td>
+                <td>
+                    <strong>超级管理员</strong>                </td>
+                <td><span class="text-success">正常</span></td>
+                <td>220</td>
+                <td>39.155.186.229</td>
+                <td>
+                    2017-08-10 20:11:06                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2016-09-10 21:09:11"></span>
+                </td>
+                <td>
+                    <a href="/admin/manager/up.html?id=1">编辑</a> |
+                    <span class="text-muted">删除</span>                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>houjiandong</td>
+                <td>候建东</td>
+                <td>
+                    <strong>超级管理员</strong>                </td>
+                <td><span class="text-success">正常</span></td>
+                <td>18</td>
+                <td>123.118.208.210</td>
+                <td>
+                    2017-02-06 10:04:28                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2016-09-10 21:09:11"></span>
+                </td>
+                <td>
+                    <a href="/admin/manager/up.html?id=2">编辑</a> |
+                    <a href="/admin/manager/delete.html?id=2" class="delete" >删除</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">19</th>
+                <td>admin</td>
+                <td>admin</td>
+                <td>
+                    <strong>超级管理员</strong>                </td>
+                <td><span class="text-success">正常</span></td>
+                <td>2</td>
+                <td>127.0.0.1</td>
+                <td>
+                    2017-01-18 15:02:24                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2017-01-18 15:00:15"></span>
+                </td>
+                <td>
+                    <a href="/admin/manager/up.html?id=19">编辑</a> |
+                    <a href="/admin/manager/delete.html?id=19" class="delete" >删除</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">20</th>
+                <td>lwqbj</td>
+                <td>阿苏</td>
+                <td>
+                    <strong>超级管理员</strong>                </td>
+                <td><span class="text-success">正常</span></td>
+                <td>2</td>
+                <td>221.217.223.35</td>
+                <td>
+                    2017-02-14 16:08:52                    <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" title="录入时间：2017-02-14 16:08:04"></span>
+                </td>
+                <td>
+                    <a href="/admin/manager/up.html?id=20">编辑</a> |
+                    <a href="/admin/manager/delete.html?id=20" class="delete" >删除</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+
+</div>
+</html>
