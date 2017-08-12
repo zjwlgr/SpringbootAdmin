@@ -68,5 +68,11 @@ public class FoManagerService {
         return fmr;
     }
 
+    /**
+     * 删除管理员操作
+     * */
+    public int deleteByPrimaryKey(int id){
+        return foManagerMapper.deleteByPrimaryKey(id);
+    }
 
 }

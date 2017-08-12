@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>跳转提示 - [[#{webname}]]</title>
+    <style type="text/css">
+        *{ padding: 0; margin: 0; }
+        body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; }
+        .system-message{ width:540px;height:120px; margin:auto;border:6px solid #5e87b0;text-align:center; position:relative;top:150px;}
+        .system-message legend{font-size:24px;font-weight:bold;color:#5e87b0;margin:auto;width:110px;}
+        .system-message h1{ font-size: 100px; font-weight: normal; line-height: 120px; margin-bottom: 12px; }
+        .system-message .jump{ padding-right:10px;height:25px;line-height:25px;font-size:14px;position:absolute;bottom:0px;left:0px;background-color:#E9EEF3; display:block;width:530px;text-align:right;}
+        .system-message .jump a{ color: #5e87b0;}
+        .system-message .success,.system-message .error{ line-height: 1.8em; font-size: 15px }
+        .system-message .detail{ font-size: 12px; line-height: 20px; margin-top: 12px; display:none}
+    </style>
+</head>
+<body>
+<fieldset class="system-message">
+    <legend>系统消息</legend>
+    <div style="text-align:left;padding-left:40px;height:75px;width:490px; padding-top: 9px;">
+
+        <p class="success" style="color: #009900" th:if="${type == 'success'}">[[${message}]]</p>
+
+        <p class="error" style="color: #ff000c;" th:if="${type == 'error'}">[[${message}]]</p>
+
+        <p class="detail"></p>
+
+    </div>
+    <p class="jump">
+        页面自动 <a id="href" th:href="${url}">跳转</a> 等待时间： <strong id="wait" th:text="${wait}"></strong> (秒)
+    </p>
+</fieldset>
+<script type="text/javascript">
+    (function(){
+        var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+        var totaltime=parseInt(wait.innerHTML);
+        var interval = setInterval(function(){
+            var time = --totaltime;
+            wait.innerHTML=""+time;
+            if(time === 0) {
+                location.href = href;
+                clearInterval(interval);
+            };
+        }, 1000);
+    })();
+</script>
+</body>
+</html>

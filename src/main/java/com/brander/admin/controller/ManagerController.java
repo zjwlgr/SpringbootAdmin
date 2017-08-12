@@ -7,6 +7,7 @@ import com.brander.common.domain.FoManagerRecord;
 import com.brander.common.service.FoManagerGroupService;
 import com.brander.common.service.FoManagerService;
 import com.brander.common.utils.PageUtil;
+import com.brander.common.utils.WebResultUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -60,6 +62,23 @@ public class ManagerController {
         //TODO 加个状态筛选
 
         return "admin/manager/list";
+    }
+
+    /**
+     * 新增管理员操作
+     * */
+
+    /**
+     * 密理员修改密码
+     * */
+
+    /**
+    * 删除管理员操作
+    * */
+    @GetMapping(value = "/manager/del")
+    public void managerDel(FoManager foManager, HttpServletResponse response) throws Exception{
+        foManagerService.deleteByPrimaryKey(foManager.getId());
+        response.sendRedirect("/admin/manager/list");
     }
 
 }

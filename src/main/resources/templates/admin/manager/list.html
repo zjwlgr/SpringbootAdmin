@@ -77,7 +77,7 @@
                 </td>
                 <td>
                     <a href="/admin/manager/up.html?id=1">编辑</a> |
-                    <a href="#" class="delete" th:if="${vo.id != 1}">删除</a>
+                    <a th:href="@{/admin/manager/del(id=${vo.id})}" class="delete" th:if="${vo.id != 1}">删除</a>
                     <span class="text-muted" th:if="${vo.id == 1}">删除</span>
                 </td>
             </tr>
