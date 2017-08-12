@@ -24,7 +24,9 @@
 
         <div class="dropdown" style="float: right;">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                选择分组查看                <span class="caret"></span>
+                <span th:if="${selectGroupname == null}">选择分组查看</span>
+                <span th:if="${selectGroupname != null}">[[${selectGroupname}]]</span>
+                <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 

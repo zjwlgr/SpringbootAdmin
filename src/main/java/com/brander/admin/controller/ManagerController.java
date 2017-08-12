@@ -40,12 +40,25 @@ public class ManagerController {
         adminTitle.setTitle1("管理员管理");adminTitle.setTitle2("列表");
         map.addAttribute("adminTitle",adminTitle);
 
+        //管理员列表，分页
         List<FoManager> foManager = foManagerService.selectByList(fmr);
         PageInfo pageInfo = new PageInfo<FoManager>(foManager);
         map.addAttribute("pageInfo",pageInfo);
         map.addAttribute("pageshow", PageUtil.show(pageInfo,request));
+
+        //用户组列表
         map.addAttribute("groupList",foManagerGroupService.selectByList(""));
-//TODO 加个状态筛选
+
+        //选择分组查看 select 中 当前被选择的用户组名称
+        FoManagerGroup foManagerGroup = foManagerGroupService.selectByPrimaryKey(fmr.getGroupId());
+        String foGroupNmae;
+        if(foManagerGroup != null) {
+            foGroupNmae = foManagerGroup.getGname();
+            map.addAttribute("selectGroupname", foGroupNmae);
+        }
+
+        //TODO 加个状态筛选
+
         return "admin/manager/list";
     }
 
