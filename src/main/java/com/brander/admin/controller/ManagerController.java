@@ -3,11 +3,9 @@ package com.brander.admin.controller;
 import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoManager;
 import com.brander.common.domain.FoManagerGroup;
-import com.brander.common.domain.FoManagerRecord;
 import com.brander.common.service.FoManagerGroupService;
 import com.brander.common.service.FoManagerService;
 import com.brander.common.utils.PageUtil;
-import com.brander.common.utils.WebResultUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,14 +57,21 @@ public class ManagerController {
             map.addAttribute("selectGroupname", foGroupNmae);
         }
 
-        //TODO 加个状态筛选
-
         return "admin/manager/list";
     }
 
     /**
      * 新增管理员操作
      * */
+    @GetMapping(value = "/manager/add")
+    public String managerAdd(ModelMap map){
+
+        AdminTitle adminTitle = new AdminTitle();
+        adminTitle.setTitle1("管理员管理");adminTitle.setTitle2("新增");
+        map.addAttribute("adminTitle",adminTitle);
+
+        return "admin/manager/add";
+    }
 
     /**
      * 密理员修改密码
