@@ -11,6 +11,8 @@ public class FoManagerGroup {
 
     private Date ctime;
 
+    private String search;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class FoManagerGroup {
 
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }

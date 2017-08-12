@@ -2,7 +2,7 @@ package com.brander.common.domain;
 
 import java.util.Date;
 
-public class FoManager {
+public class FoManager extends Page {
     private Integer id;
 
     private String username;
@@ -22,6 +22,10 @@ public class FoManager {
     private Date loginTime;
 
     private Date ctime;
+
+    private String search;
+
+    private String groupName;
 
     public Integer getId() {
         return id;
@@ -101,6 +105,22 @@ public class FoManager {
 
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override

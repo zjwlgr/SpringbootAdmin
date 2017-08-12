@@ -31,6 +31,20 @@
     where username = #{username}
   </select>
 
+  <!--管理员列表-->
+  <select id="selectByList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_manager
+    where 1 = 1
+    <if test="arg0 != null">
+      AND group_id = #{arg0}
+    </if>
+    <if test="arg1 != null">
+      AND username LIKE CONCAT(CONCAT('%', #{arg1}),'%') OR uname LIKE  CONCAT(CONCAT('%', #{arg1}),'%')
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fo_manager
     where id = #{id,jdbcType=INTEGER}

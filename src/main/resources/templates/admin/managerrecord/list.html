@@ -14,7 +14,7 @@
             <div class="col-lg-3" style="float: right; padding-right: 0px; padding-left: 8px;">
                 <form id="form1_search" name="form1_search" method="get" action="">
                     <div class="input-group">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="管理员用户名/姓名" value="">
+                        <input type="text" id="search" name="search" class="form-control" placeholder="管理员用户名/姓名" th:value="${#httpServletRequest.getParameter('search')}">
                         <span class="input-group-btn">
                       <button class="btn btn-primary" type="submit">Go!</button>
                   </span>
@@ -52,7 +52,7 @@
                     <td>[[${vo.getSystem()}]]</td>
                     <td th:text="${#dates.format(vo.getCtime(), 'yyyy-MM-dd hh:mm:ss')}"></td>
                     <td>
-                        <a th:href="'/admin/managerrecord/delete?id='+${vo.getId()}" class="delete" >删除</a>
+                        <a th:href="@{/admin/managerrecord/delete(id=${vo.getId()})}" class="delete" >删除</a>
                     </td>
                 </tr>
 
@@ -60,7 +60,9 @@
                 </tbody>
             </table>
 
-            <span th:utext="${pageshow}"></span>
+            <span th:utext="${pageshow}" th:if="${pageInfo.list.size() > 0}"></span>
+
+            <div class="alert alert-warning" role="alert" th:if="${pageInfo.list.size() <= 0}"><span class="glyphicon glyphicon-info-sign glyphicon-pos-2"></span> 暂无信息！</div>
 
         </div>
 
