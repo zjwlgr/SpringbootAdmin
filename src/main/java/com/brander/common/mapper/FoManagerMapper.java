@@ -17,9 +17,14 @@ public interface FoManagerMapper {
 
     int updateByPrimaryKey(FoManager record);
 
+    //查询管理员总数
+    int selectByCount();
+
     //根据用户名查询单条数据
-    FoManager selectByUsername(String username);
+    FoManager selectByUsername(String username,Integer id);
 
     //管理员列表
     List<FoManager> selectByList(Integer groupId,String search);
+
+
 }

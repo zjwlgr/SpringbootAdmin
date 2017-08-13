@@ -9,20 +9,21 @@
     <div class="bs-hander">
 
         <a th:href="@{/admin/manager/list}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 ([[${userCount}]])</a>
-        <a th:href="@{/admin/manager/add}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
+        <a th:href="@{/admin/manager/add}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
 
     </div>
 
     <div class="bs-center">
 
-        <form id="form1_manager" name="form1_manager" method="post" th:action="@{/admin/manager/add}" class="form-horizontal">
+        <form id="form1_manager" name="form1_manager" method="post" th:action="@{/admin/manager/up}" class="form-horizontal">
+            <input name="id" type="hidden" id="id" th:value="${managerUser.id}">
 
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">用户组</label>
                 <div class="col-sm-5">
                     <div class="dropdown" style="float: left;">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                            <span id="text">选择用户组</span>
+                            <span id="text" th:text="${groupName}">选择用户组</span>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" id="dropdownMenuone" role="menu" aria-labelledby="dropdownMenu1">
@@ -30,22 +31,21 @@
                                 <a href="#" th:_i="${vo.id}">[[${vo.gname}]]</a>
                             </li>
                         </ul>
-                        <input type="hidden" name="groupId" id="group_id" value="" />
+                        <input type="hidden" name="groupId" id="group_id"  th:value="${managerUser.groupId}" />
                     </div>
-                    <a th:href="@{/admin/managergroup/add}" style="float: left; margin-left: 10px; margin-top: 3px;" class="btn btn-default btn-sm">新增用户组</a>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">用户名</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" name="username" id="username" placeholder="用户名">
+                    <input type="text" class="form-control" name="username" id="username" th:value="${managerUser.username}" placeholder="用户名">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">密码</label>
                 <div class="col-sm-5">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="密码">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="密码不修改请保留为空">
                 </div>
             </div>
             <div class="form-group">
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label for="uname" class="col-sm-2 control-label">姓名</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" name="uname" id="uname" placeholder="姓名">
+                    <input type="text" class="form-control" name="uname" id="uname" th:value="${managerUser.uname}" placeholder="姓名">
                 </div>
             </div>
             <div class="form-group">
@@ -65,10 +65,10 @@
                 <div class="col-sm-2">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="locking" checked value="0"> 正常 &nbsp;
+                            <input type="radio" name="locking" th:checked="${managerUser.locking == 0}" value="0"> 正常 &nbsp;
                         </label>
                         <label>
-                            <input type="radio" name="locking" value="1"> 锁定
+                            <input type="radio" name="locking" th:checked="${managerUser.locking == 1}" value="1"> 锁定
                         </label>
                     </div>
                 </div>

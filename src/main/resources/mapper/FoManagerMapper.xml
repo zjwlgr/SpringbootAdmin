@@ -23,12 +23,21 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <!--查询管理员总数-->
+  <select id="selectByCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(id) as total
+    FROM fo_manager
+  </select>
+
   <!--根据用户名查询单条数据-->
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from fo_manager
-    where username = #{username}
+    where username = #{arg0}
+    <if test="arg1 != null">
+      AND id != #{arg1}
+    </if>
   </select>
 
   <!--管理员列表-->
@@ -43,6 +52,7 @@
     <if test="arg1 != null">
       AND username LIKE CONCAT(CONCAT('%', #{arg1}),'%') OR uname LIKE  CONCAT(CONCAT('%', #{arg1}),'%')
     </if>
+    ORDER by id ASC
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

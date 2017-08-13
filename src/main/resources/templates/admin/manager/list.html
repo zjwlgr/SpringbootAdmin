@@ -29,12 +29,9 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-
                 <li role="presentation" th:each="vo:${groupList}">
                     <a role="menuitem" tabindex="-1" th:href="@{/admin/manager/list(groupId=${vo.id})}">[[${vo.gname}]]</a>
                 </li>
-
-
             </ul>
         </div>
 
@@ -72,11 +69,12 @@
                 <td>[[${vo.number}]]</td>
                 <td>[[${vo.loginIp}]]</td>
                 <td>
+                    <span th:if="${vo.loginTime == null}">0000-00-00 00:00:00</span>
                     <span th:text="${#dates.format(vo.loginTime, 'yyyy-MM-dd hh:mm:ss')}">[[${vo.loginTime}]]</span>
                     <span style="cursor: pointer;" class="glyphicon glyphicon-circle-arrow-right" data-toggle="tooltip" data-placement="bottom" th:title="'录入时间：'+${#dates.format(vo.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span>
                 </td>
                 <td>
-                    <a href="/admin/manager/up.html?id=1">编辑</a> |
+                    <a th:href="@{/admin/manager/up(id=${vo.id})}">编辑</a> |
                     <a th:href="@{/admin/manager/del(id=${vo.id})}" class="delete" th:if="${vo.id != 1}">删除</a>
                     <span class="text-muted" th:if="${vo.id == 1}">删除</span>
                 </td>

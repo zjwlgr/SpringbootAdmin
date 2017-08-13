@@ -24,12 +24,19 @@ public class FoManagerService {
     FoManagerGroupService foManagerGroupService;
 
     /**
+     * 根据用户ID查询
+     * */
+    public FoManager selectByPrimaryKey(Integer id){
+        return foManagerMapper.selectByPrimaryKey(id);
+    }
+
+    /**
     * 管理员登录，判断用户存在、验证密码、用户是否被锁定
     * @param username 用户名
     * @param password 密码
     * */
     public FoManager loginAction(String username,String password) throws Exception{
-        FoManager foManager = foManagerMapper.selectByUsername(username);
+        FoManager foManager = foManagerMapper.selectByUsername(username,null);
         if(foManager == null){
             throw new JsonException(JsonResultEnum.ADMIN_USER_NULL);
         }else if(!MD5Util.string2MD5(password).equals(foManager.getPassword())) {
@@ -63,9 +70,51 @@ public class FoManagerService {
         List<FoManager> fmr = foManagerMapper.selectByList(foManager.getGroupId(),foManager.getSearch());
         for(FoManager fo : fmr){
             FoManagerGroup foManagerGroup = foManagerGroupService.selectByPrimaryKey(fo.getGroupId());
-            fo.setGroupName(foManagerGroup.getGname());
+            fo.setGroupName(foManagerGroup.getGname());//得到用户组名称
         }
         return fmr;
+    }
+
+    /**
+     * 新增管理员-操作，检查用户是否存在
+     * */
+    public boolean insertSelective(FoManager foManager,HttpServletRequest request){
+        FoManager userOne = foManagerMapper.selectByUsername(foManager.getUsername(),null);
+        if(userOne != null){
+            return false;
+        }else{
+            foManager.setLoginIp(AchieveUtil.getIpAddr(request));
+            foManager.setCtime(AchieveUtil.getDateTime(""));
+            foManager.setPassword(MD5Util.string2MD5(foManager.getPassword()));
+            foManagerMapper.insertSelective(foManager);
+            return true;
+        }
+    }
+
+    /**
+     * 编辑管理员信息
+     * */
+    public boolean updateByPrimaryKeySelectivePassword(FoManager foManager){
+        FoManager userOne = foManagerMapper.selectByUsername(foManager.getUsername(),foManager.getId());
+        if(userOne != null){
+            return false;
+        }else {
+            if ("".equals(foManager.getPassword())) {
+                //密码为空则不修改
+                foManager.setPassword(null);
+            } else {
+                foManager.setPassword(MD5Util.string2MD5(foManager.getPassword()));
+            }
+            foManagerMapper.updateByPrimaryKeySelective(foManager);
+            return true;
+        }
+    }
+
+    /**
+     * 查询管理员总数
+     * */
+    public int selectByCount(){
+        return foManagerMapper.selectByCount();
     }
 
     /**
