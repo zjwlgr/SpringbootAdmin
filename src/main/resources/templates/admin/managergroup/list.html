@@ -41,7 +41,11 @@
                 <td>[[${vo.gname}]]</td>
                 <td th:text="${#dates.format(vo.getCtime(), 'yyyy-MM-dd hh:mm:ss')}"></td>
                 <td>
-                    <span class="text-muted">编辑 | 删除</span>
+                    <span class="text-muted" th:if="${vo.function == 'CJ'}">编辑 | 删除</span>
+                    <span th:if="${vo.function != 'CJ'}">
+                        <a th:href="@{/admin/managergroup/up(id=${vo.id})}">编辑</a> |
+                        <a th:href="@{/admin/managergroup/del(id=${vo.id})}" class="delete">删除</a>
+                    </span>
                 </td>
             </tr>
 
