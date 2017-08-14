@@ -71,9 +71,16 @@ public class ManagerGroupController {
             map.addAttribute("leftList",foList);
         }else if(request.getMethod().equals("POST")){
             String[] functionCheckbox= request.getParameterValues("function");
+            String zid = "",fid = "";
             for(String str : functionCheckbox){
-                System.out.println(str);
+                String [] idArr = str.split("_");
+                System.out.println("f"+idArr[0]);
+                System.out.println("z"+idArr[1]);
+                fid = fid + idArr[0]+",";
+                zid = zid + idArr[1]+",";
             }
+            System.out.println(fid);
+            System.out.println(zid);
             //TODO 父与子功能 存为ID,ID。。w分两个字段，模板中用indexOf(ID,)匹配，对应用户权限功能列表当前方法可以，判断用户是否有权限 还是单一判断列表页也可以使用indexOf，参考php
         }
         return "admin/managergroup/add";

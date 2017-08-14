@@ -31,7 +31,7 @@
                     <div class="checkbox" style="padding-top: 0px;">
                         <label class="checkbox-inline checkboxclick" style="margin-left: 0px; margin-right: 10px;" th:each="vov:${vo.getClist()}">
                             <span></span>
-                            <input type="checkbox" class="jquery_click" name="function" th:id="'function_'+${vov.id}" th:value="${vov.id}+'_'+${vo.id}">[[${vov.getFname()}]]
+                            <input type="checkbox" class="jquery_click" name="function" th:id="'function_'+${vov.id}" th:value="${vo.id}+'_'+${vov.id}">[[${vov.getFname()}]]
                         </label>
                     </div>
                     </span>
