@@ -68,7 +68,7 @@ public class FoManagerService {
             PageHelper.startPage(foManager.getPage(), foManager.getRows());
         }
         List<FoManager> fmr = foManagerMapper.selectByList(foManager.getGroupId(),foManager.getSearch());
-        for(FoManager fo : fmr){
+        for(FoManager fo : fmr){//循环嵌套
             FoManagerGroup foManagerGroup = foManagerGroupService.selectByPrimaryKey(fo.getGroupId());
             fo.setGroupName(foManagerGroup.getGname());//得到用户组名称
         }
@@ -107,6 +107,22 @@ public class FoManagerService {
             }
             foManagerMapper.updateByPrimaryKeySelective(foManager);
             return true;
+        }
+    }
+
+    /**
+    * 管理员密码修改
+    * */
+    public boolean updatePassword(FoManager foManager, int adminId){
+        FoManager adminuser = foManagerMapper.selectByPrimaryKey(adminId);
+        //判断旧密码是否正确
+        if(adminuser.getPassword().equals(MD5Util.string2MD5(foManager.getOldpassword()))){
+            foManager.setId(adminId);
+            foManager.setPassword(MD5Util.string2MD5(foManager.getPassword()));
+            foManagerMapper.updateByPrimaryKeySelective(foManager);
+            return true;
+        }else{
+            return false;
         }
     }
 

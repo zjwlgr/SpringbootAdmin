@@ -18,6 +18,9 @@ public interface FoManagerGroupMapper {
 
     int updateByPrimaryKey(FoManagerGroup record);
 
+    //用户组列表，下拉菜单用
+    List<FoManagerGroup> selectByOption();
+
     //查询用户组列表 全部 或 search 查询
     List<FoManagerGroup> selectByList(@Param("search") String search);
 

@@ -17,6 +17,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <!--用户组列表，下拉菜单用-->
+  <select id="selectByOption" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_manager_group ORDER BY id ASC
+  </select>
+
   <!--查询用户组列表 全部 或 search 查询-->
   <select id="selectByList" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -25,6 +32,7 @@
     <if test="search != null">
       WHERE gname LIKE CONCAT(CONCAT('%', #{search}),'%')
     </if>
+    ORDER BY id ASC
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

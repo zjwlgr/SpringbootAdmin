@@ -48,7 +48,7 @@ public class ManagerController {
         map.addAttribute("pageshow", PageUtil.show(pageInfo,request));
 
         //用户组列表
-        map.addAttribute("groupList",foManagerGroupService.selectByList(""));
+        map.addAttribute("groupList",foManagerGroupService.selectByOption());
 
         //选择分组查看 select 中 当前被选择的用户组名称
         FoManagerGroup foManagerGroup = foManagerGroupService.selectByPrimaryKey(fmr.getGroupId());
@@ -74,7 +74,7 @@ public class ManagerController {
             //管理员总数
             map.addAttribute("userCount", foManagerService.selectByCount());
             //用户组列表
-            map.addAttribute("groupList", foManagerGroupService.selectByList(""));
+            map.addAttribute("groupList", foManagerGroupService.selectByOption());
             return "admin/manager/add";
         }else if(request.getMethod().equals("POST")){
             boolean result = foManagerService.insertSelective(foManager,request);
@@ -103,7 +103,7 @@ public class ManagerController {
             //管理员总数
             map.addAttribute("userCount", foManagerService.selectByCount());
             //用户组列表
-            map.addAttribute("groupList", foManagerGroupService.selectByList(""));
+            map.addAttribute("groupList", foManagerGroupService.selectByOption());
             //对应用户的用户组名称
             map.addAttribute("groupName",foManagerGroupService.selectByPrimaryKey(managerUser.getGroupId()).getGname());
             return "admin/manager/up";
@@ -121,6 +121,24 @@ public class ManagerController {
     /**
      * 密理员修改密码
      * */
+    @RequestMapping(value = "/editpwd")
+    public String editPassword(ModelMap map,FoManager foManager,HttpServletRequest request){
+        if(request.getMethod().equals("GET")) {
+            AdminTitle adminTitle = new AdminTitle();
+            adminTitle.setTitle1("修改密码");
+            map.addAttribute("adminTitle", adminTitle);
+            return "admin/manager/editpwd";
+        }else if(request.getMethod().equals("POST")){
+            int adminId = (int)(request.getSession().getAttribute("adminId"));
+            boolean result = foManagerService.updatePassword(foManager,adminId);
+            if(result){
+                return WebResultUtil.success(map,"密码修改成功，页面跳转后将重新登录！","/admin/loginout");
+            }else{
+                return WebResultUtil.error(map,"旧密码输入错误！","/admin/editpwd");
+            }
+        }
+        return "";
+    }
 
     /**
     * 删除管理员操作

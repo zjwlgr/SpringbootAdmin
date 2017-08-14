@@ -27,6 +27,8 @@ public class FoManager extends Page {
 
     private String groupName;
 
+    private String oldpassword;
+
     public Integer getId() {
         return id;
     }
@@ -121,6 +123,14 @@ public class FoManager extends Page {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getOldpassword() {
+        return oldpassword;
+    }
+
+    public void setOldpassword(String oldpassword) {
+        this.oldpassword = oldpassword;
     }
 
     @Override

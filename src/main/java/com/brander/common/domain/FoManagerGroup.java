@@ -2,7 +2,7 @@ package com.brander.common.domain;
 
 import java.util.Date;
 
-public class FoManagerGroup {
+public class FoManagerGroup extends Page {
     private Integer id;
 
     private String gname;

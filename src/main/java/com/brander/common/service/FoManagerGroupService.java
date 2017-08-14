@@ -2,6 +2,7 @@ package com.brander.common.service;
 
 import com.brander.common.domain.FoManagerGroup;
 import com.brander.common.mapper.FoManagerGroupMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,20 @@ public class FoManagerGroupService {
     }
 
     /**
+     * 用户组列表，下拉菜单用
+     * */
+    public List<FoManagerGroup> selectByOption(){
+        return foManagerGroupMapper.selectByOption();
+    }
+
+    /**
      * 查询用户组列表 全部 或 search 查询
      * */
-    public List<FoManagerGroup> selectByList(String search){
-        return foManagerGroupMapper.selectByList(search);
+    public List<FoManagerGroup> selectByList(FoManagerGroup foManagerGroup){
+        if (foManagerGroup.getPage() != null && foManagerGroup.getRows() != null) {
+            PageHelper.startPage(foManagerGroup.getPage(), foManagerGroup.getRows());
+        }
+        return foManagerGroupMapper.selectByList(foManagerGroup.getSearch());
     }
 
 }

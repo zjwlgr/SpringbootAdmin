@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+    <div class="bs-hander">
+
+        <a th:href="@{/admin/editpwd}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp; 修改密码</a>
+
+    </div>
+
+    <div class="bs-center">
+
+        <form id="form1_editpwd" name="form1_editpwd" method="post" action="" class="form-horizontal">
+
+            <div class="form-group">
+                <label for="oldpassword" class="col-sm-2 control-label">旧密码</label>
+                <div class="col-sm-5">
+                    <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="旧密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">新密码</label>
+                <div class="col-sm-5">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="新密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="repassword" class="col-sm-2 control-label">确认新密码</label>
+                <div class="col-sm-5">
+                    <input type="password" class="form-control" name="repassword" id="repassword" placeholder="确认新密码">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"> 提 交 &nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+</html>
