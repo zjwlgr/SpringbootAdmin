@@ -35,6 +35,12 @@
     ORDER BY id ASC
   </select>
 
+  <!--查询管理员分组总数-->
+  <select id="selectByCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(id) as total
+    FROM fo_manager_group
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fo_manager_group
     where id = #{id,jdbcType=INTEGER}

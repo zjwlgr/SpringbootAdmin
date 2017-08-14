@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+    <div class="bs-hander">
+
+        <a th:href="@{/admin/managergroup/list}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 ([[${userGroupCount}]])</a>
+        <a th:href="@{/admin/managergroup/add}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
+
+    </div>
+
+    <div class="bs-center">
+
+        <form id="form1_group" name="form1_group" method="post" action="" class="form-horizontal">
+
+            <div class="form-group">
+                <label for="gname" class="col-sm-2 control-label">管理组名称</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="gname" id="gname" placeholder="管理组名称">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">选择权限</label>
+                <div class="col-sm-9">
+                    <span th:each="vo,key:${leftList}">
+                    <div class="checkbox" th:style="${key.index != 0}? 'margin-top: 15px;' : ''"><strong>[[${vo.getFname()}]]</strong></div>
+                    <div class="checkbox" style="padding-top: 0px;">
+                        <label class="checkbox-inline checkboxclick" style="margin-left: 0px; margin-right: 10px;" th:each="vov:${vo.getClist()}">
+                            <span></span>
+                            <input type="checkbox" class="jquery_click" name="function" th:id="'function_'+${vov.id}" th:value="${vov.id}+'_'+${vo.id}">[[${vov.getFname()}]]
+                        </label>
+                    </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-top: 6px;">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"> 提 交 &nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+</html>

@@ -15,6 +15,10 @@ public class FoFunctionService {
 
     /**
      * 根据fid返回对应功能列表
+     * @param fid 父ID
+     * @param state 0为正常，1为隐藏
+     * @param idin 子功能id,id...
+     * @param fidin 父功能id,id...
      * */
     public List<FoFunction> selectByfid(Integer fid,boolean state,List<FoFunction> idin,List<FoFunction> fidin){
         return foFunctionMapper.selectByfid(fid,state,idin,fidin);

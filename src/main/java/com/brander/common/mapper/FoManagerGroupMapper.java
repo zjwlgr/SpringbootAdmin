@@ -24,4 +24,7 @@ public interface FoManagerGroupMapper {
     //查询用户组列表 全部 或 search 查询
     List<FoManagerGroup> selectByList(@Param("search") String search);
 
+    //查询管理员分组总数
+    int selectByCount();
+
 }

@@ -38,4 +38,18 @@ public class FoManagerGroupService {
         return foManagerGroupMapper.selectByList(foManagerGroup.getSearch());
     }
 
+    /**
+     * 删除管理员分组
+     * */
+    public int deleteByPrimaryKey(FoManagerGroup foManagerGroup){
+        return foManagerGroupMapper.deleteByPrimaryKey(foManagerGroup.getId());
+    }
+
+    /**
+     * 查询管理员分组总数
+     * */
+    public int selectByCount(){
+        return foManagerGroupMapper.selectByCount();
+    }
+
 }
