@@ -11,6 +11,8 @@ public class FoManagerGroup extends Page {
 
     private Date ctime;
 
+    private String childtion;
+
     private String search;
 
     public Integer getId() {
@@ -43,6 +45,14 @@ public class FoManagerGroup extends Page {
 
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    public String getChildtion() {
+        return childtion;
+    }
+
+    public void setChildtion(String childtion) {
+        this.childtion = childtion;
     }
 
     public String getSearch() {
