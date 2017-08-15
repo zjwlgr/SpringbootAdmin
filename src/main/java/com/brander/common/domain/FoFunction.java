@@ -20,6 +20,8 @@ public class FoFunction {
 
     private Date ctime;
 
+    private Integer childfocount;
+
     private List<FoFunction> clist;
 
     public Integer getId() {
@@ -84,6 +86,14 @@ public class FoFunction {
 
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    public Integer getChildfocount() {
+        return childfocount;
+    }
+
+    public void setChildfocount(Integer childfocount) {
+        this.childfocount = childfocount;
     }
 
     public List<FoFunction> getClist() {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+    <div class="bs-hander">
+
+        <a th:href="@{/admin/function/list}" type="button" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 </a>
+        <a th:href="@{/admin/function/add}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
+
+        <!--<div class="col-lg-3" style="float: right; padding-right: 0px; padding-left: 8px;">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="搜索">
+                  <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">Go!</button>
+                  </span>
+            </div>
+        </div>-->
+
+    </div>
+
+    <div class="bs-center">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr class="active">
+                <th width="6%">#</th>
+                <th width="16%">所属功能组</th>
+                <th width="16%">功能名称</th>
+                <th width="16%">功能链接</th>
+                <th width="6%">状态</th>
+                <th width="5%">排序</th>
+                <th width="16%">录入时间</th>
+                <th width="10%">操作</th>
+            </tr>
+            </thead>
+
+            <tbody th:each="vo,key:${functionList}">
+
+            <tr class="warning_my">
+                <th scope="row">[[${vo.id}]]</th>
+                <td>[[${vo.fname}]]</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <span class="text-danger" th:if="${vo.state == true}">隐藏</span>
+                    <span class="text-success" th:if="${vo.state == false}">显示</span>
+                </td>
+                <td>[[${vo.sort}]]</td>
+                <td th:text="${#dates.format(vo.ctime, 'yyyy-MM-dd hh:mm:ss')}"></td>
+                <td>
+                    <a th:href="@{/admin/function/up(id=${vo.id})}">编辑</a>
+                    |
+                    <a th:href="@{/admin/function/del(id=${vo.id})}" class="delete" _m="确定要删除该功能组？"  th:if="${vo.candel == false}" th:_d="${vo.childfocount}">删除</a>
+                    <span class="text-muted" th:if="${vo.candel == true}">删除</span>
+                </td>
+            </tr>
+            <tr th:each="vov:${vo.getClist()}">
+                <th scope="row">[[${vov.id}]]</th>
+                <td></td>
+                <td>[[${vov.fname}]]</td>
+                <td><a th:href="${vov.furi}" target="_blank">[[${vov.furi}]]</a></td>
+                <td>
+                    <span class="text-danger" th:if="${vov.state == true}">隐藏</span>
+                    <span class="text-success" th:if="${vov.state == false}">显示</span>
+                </td>
+                <td>[[${vov.sort}]]</td>
+                <td th:text="${#dates.format(vov.ctime, 'yyyy-MM-dd hh:mm:ss')}"></td>
+                <td>
+                    <a th:href="@{/admin/function/up(id=${vov.id})}">编辑</a>
+                    |
+                    <a th:href="@{/admin/function/del(id=${vov.id})}" class="delete" th:if="${vo.candel == false}">删除</a>
+                    <span class="text-muted" th:if="${vo.candel == true}">删除</span>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+</html>

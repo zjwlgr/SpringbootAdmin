@@ -64,6 +64,12 @@
     GROUP BY fid
   </select>
 
+  <!--根据fid查询该fid下面的子功能数量-->
+  <select id="selectCidCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select COUNT(id) as total from fo_function
+    where fid = #{fid}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fo_function
     where id = #{id,jdbcType=INTEGER}

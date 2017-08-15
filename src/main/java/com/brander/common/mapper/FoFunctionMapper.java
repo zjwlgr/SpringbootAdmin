@@ -26,4 +26,7 @@ public interface FoFunctionMapper {
 
     //通过子功能ID，查询父功能ID，ID
     List<FoFunction> selectByinchildId(@Param("cctList") List<FoFunction> cctList);
+
+    //根据fid查询该fid下面的子功能数量
+    Integer selectCidCount(Integer fid);
 }

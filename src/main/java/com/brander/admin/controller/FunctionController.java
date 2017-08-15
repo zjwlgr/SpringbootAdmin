@@ -1,14 +1,17 @@
 package com.brander.admin.controller;
 
+import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoFunction;
 import com.brander.common.service.FoFunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -20,6 +23,38 @@ public class FunctionController {
 
     @Autowired
     FoFunctionService foFunctionService;
+
+    /**
+     * 功能管理列表
+     * */
+    @GetMapping(value = "/function/list")
+    public String functionList(ModelMap map){
+        AdminTitle adminTitle = new AdminTitle();
+        adminTitle.setTitle1("系统功能管理");adminTitle.setTitle2("列表");
+        map.addAttribute("adminTitle",adminTitle);
+
+        //功能列表
+        List<FoFunction> functionList = foFunctionService.selectByfid(0,false,null,null);
+        for(FoFunction fo : functionList){
+            //查询该fid下面的子功能数量
+            fo.setChildfocount(foFunctionService.selectCidCount(fo.getId()));
+            //循环嵌套子功能列表
+            fo.setClist(foFunctionService.selectByfid(fo.getId(),false,null,null));
+        }
+        map.addAttribute("functionList",functionList);
+
+        return "admin/function/list";
+    }
+
+    /**
+     * 删除功能列表
+     * */
+    @GetMapping(value = "/function/del")
+    public void functionDel(FoFunction foFunction, HttpServletResponse response) throws Exception{
+        foFunctionService.deleteByPrimaryKey(foFunction.getId());
+        response.sendRedirect("/admin/function/list");
+    }
+
 
     /**
      * 左侧功能列表 ajax 搜索功能

@@ -36,5 +36,19 @@ public class FoFunctionService {
      * */
     public List<FoFunction> selectByinchildId(List<FoFunction> cctList){
         return foFunctionMapper.selectByinchildId(cctList);
-    };
+    }
+
+    /**
+     * 根据fid查询该fid下面的子功能数量
+     * */
+    public Integer selectCidCount(Integer fid){
+        return foFunctionMapper.selectCidCount(fid);
+    }
+
+    /**
+     * 删除功能列表
+     * */
+    public int deleteByPrimaryKey(Integer id){
+        return foFunctionMapper.deleteByPrimaryKey(id);
+    }
 }

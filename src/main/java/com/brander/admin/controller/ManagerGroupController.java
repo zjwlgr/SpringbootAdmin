@@ -62,11 +62,11 @@ public class ManagerGroupController {
             //管理员分组总数
             map.addAttribute("userGroupCount",foManagerGroupService.selectByCount());
             //功能列表
-            List<FoFunction> foList = foFunctionService.selectByfid(0,true,null,null);
-            for(FoFunction fo : foList){
+            List<FoFunction> groupFoList = foFunctionService.selectByfid(0,true,null,null);
+            for(FoFunction fo : groupFoList){
                 fo.setClist(foFunctionService.selectByfid(fo.getId(),true,null,null));
             }
-            map.addAttribute("leftList",foList);
+            map.addAttribute("groupFoList",groupFoList);
         }else if(request.getMethod().equals("POST")){
             String[] functionCheckbox= request.getParameterValues("function");
             //父与子功能 存为ID,ID。。w分两个字段
@@ -94,11 +94,11 @@ public class ManagerGroupController {
             //管理员分组总数
             map.addAttribute("userGroupCount",foManagerGroupService.selectByCount());
             //功能列表
-            List<FoFunction> foList = foFunctionService.selectByfid(0,true,null,null);
-            for(FoFunction fo : foList){
+            List<FoFunction> groupFoList = foFunctionService.selectByfid(0,true,null,null);
+            for(FoFunction fo : groupFoList){
                 fo.setClist(foFunctionService.selectByfid(fo.getId(),true,null,null));
             }
-            map.addAttribute("leftList",foList);
+            map.addAttribute("groupFoList",groupFoList);
         }else if(request.getMethod().equals("POST")) {
             String[] functionCheckbox = request.getParameterValues("function");
             //父与子功能 存为ID,ID。。w分两个字段
