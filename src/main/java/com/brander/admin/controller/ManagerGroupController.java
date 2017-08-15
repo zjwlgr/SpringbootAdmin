@@ -2,13 +2,11 @@ package com.brander.admin.controller;
 
 import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoFunction;
-import com.brander.common.domain.FoManager;
 import com.brander.common.domain.FoManagerGroup;
 import com.brander.common.service.FoFunctionService;
 import com.brander.common.service.FoManagerGroupService;
-import com.brander.common.utils.PageUtil;
+import com.brander.common.utils.*;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -71,19 +69,46 @@ public class ManagerGroupController {
             map.addAttribute("leftList",foList);
         }else if(request.getMethod().equals("POST")){
             String[] functionCheckbox= request.getParameterValues("function");
-            String zid = "",fid = "";
-            for(String str : functionCheckbox){
-                String [] idArr = str.split("_");
-                System.out.println("f"+idArr[0]);
-                System.out.println("z"+idArr[1]);
-                fid = fid + idArr[0]+",";
-                zid = zid + idArr[1]+",";
-            }
-            System.out.println(fid);
-            System.out.println(zid);
-            //TODO 父与子功能 存为ID,ID。。w分两个字段，模板中用indexOf(ID,)匹配，对应用户权限功能列表当前方法可以，判断用户是否有权限 还是单一判断列表页也可以使用indexOf，参考php
+            //父与子功能 存为ID,ID。。w分两个字段
+            foManagerGroup.setFunction(AdminUtil.managerGroupCheckbox(functionCheckbox,"fid"));
+            foManagerGroup.setChildtion(AdminUtil.managerGroupCheckbox(functionCheckbox,"zid"));
+            foManagerGroup.setCtime(AchieveUtil.getDateTime(""));
+            foManagerGroupService.insertSelective(foManagerGroup);
+            return WebResultUtil.success(map,"管理员分组新增成功！","/admin/managergroup/list");
         }
         return "admin/managergroup/add";
+    }
+
+    /**
+     * 编辑管理员分组
+     * */
+    @RequestMapping(value = "/managergroup/up")
+    public String managerGroupUp(ModelMap map, HttpServletRequest request, FoManagerGroup foManagerGroup){
+        if(request.getMethod().equals("GET")) {
+            AdminTitle adminTitle = new AdminTitle();
+            adminTitle.setTitle1("管理员分组管理");
+            adminTitle.setTitle2("编辑");
+            map.addAttribute("adminTitle", adminTitle);
+            //得到当前ID的分组对象
+            map.addAttribute("groupInfo",foManagerGroupService.selectByPrimaryKey(foManagerGroup.getId()));
+            //管理员分组总数
+            map.addAttribute("userGroupCount",foManagerGroupService.selectByCount());
+            //功能列表
+            List<FoFunction> foList = foFunctionService.selectByfid(0,true,null,null);
+            for(FoFunction fo : foList){
+                fo.setClist(foFunctionService.selectByfid(fo.getId(),true,null,null));
+            }
+            map.addAttribute("leftList",foList);
+        }else if(request.getMethod().equals("POST")) {
+            String[] functionCheckbox = request.getParameterValues("function");
+            //父与子功能 存为ID,ID。。w分两个字段
+            foManagerGroup.setFunction(AdminUtil.managerGroupCheckbox(functionCheckbox,"fid"));
+            foManagerGroup.setChildtion(AdminUtil.managerGroupCheckbox(functionCheckbox,"zid"));
+            foManagerGroup.setCtime(AchieveUtil.getDateTime(""));
+            foManagerGroupService.updateByPrimaryKeySelective(foManagerGroup);
+            return WebResultUtil.success(map,"管理员分组编辑成功！","/admin/managergroup/list");
+        }
+        return "admin/managergroup/up";
     }
 
     /**

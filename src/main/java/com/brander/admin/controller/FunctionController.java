@@ -47,5 +47,5 @@ public class FunctionController {
 
 
 
-
+    //TODO 对应用户权限功能列表当前方法可以，判断用户是否有权限 还是单一判断列表页也可以使用indexOf，参考php
 }

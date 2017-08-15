@@ -75,7 +75,6 @@ public class ManagerController {
             map.addAttribute("userCount", foManagerService.selectByCount());
             //用户组列表
             map.addAttribute("groupList", foManagerGroupService.selectByOption());
-            return "admin/manager/add";
         }else if(request.getMethod().equals("POST")){
             boolean result = foManagerService.insertSelective(foManager,request);
             if(result){
@@ -84,7 +83,7 @@ public class ManagerController {
                 return WebResultUtil.error(map,"用户"+foManager.getUsername()+"已存在，请更换！！","/admin/manager/add");
             }
         }
-        return "";
+        return "admin/manager/add";
     }
 
     /**
@@ -106,7 +105,6 @@ public class ManagerController {
             map.addAttribute("groupList", foManagerGroupService.selectByOption());
             //对应用户的用户组名称
             map.addAttribute("groupName",foManagerGroupService.selectByPrimaryKey(managerUser.getGroupId()).getGname());
-            return "admin/manager/up";
         }else if(request.getMethod().equals("POST")){
             boolean result = foManagerService.updateByPrimaryKeySelectivePassword(foManager);
             if(result){
@@ -115,7 +113,7 @@ public class ManagerController {
                 return WebResultUtil.error(map,"用户"+foManager.getUsername()+"已存在，请更换！！","/admin/manager/up?id="+foManager.getId());
             }
         }
-        return "";
+        return "admin/manager/up";
     }
 
     /**
@@ -127,7 +125,6 @@ public class ManagerController {
             AdminTitle adminTitle = new AdminTitle();
             adminTitle.setTitle1("修改密码");
             map.addAttribute("adminTitle", adminTitle);
-            return "admin/manager/editpwd";
         }else if(request.getMethod().equals("POST")){
             int adminId = (int)(request.getSession().getAttribute("adminId"));
             boolean result = foManagerService.updatePassword(foManager,adminId);
@@ -137,7 +134,7 @@ public class ManagerController {
                 return WebResultUtil.error(map,"旧密码输入错误！","/admin/editpwd");
             }
         }
-        return "";
+        return "admin/manager/editpwd";
     }
 
     /**

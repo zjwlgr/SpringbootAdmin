@@ -39,6 +39,20 @@ public class FoManagerGroupService {
     }
 
     /**
+     * 新增管理员分组
+     * */
+    public int insertSelective(FoManagerGroup foManagerGroup){
+        return foManagerGroupMapper.insertSelective(foManagerGroup);
+    }
+
+    /**
+     * 编辑管理员分组
+     * */
+    public int updateByPrimaryKeySelective(FoManagerGroup foManagerGroup){
+        return foManagerGroupMapper.updateByPrimaryKeySelective(foManagerGroup);
+    }
+
+    /**
      * 删除管理员分组
      * */
     public int deleteByPrimaryKey(FoManagerGroup foManagerGroup){

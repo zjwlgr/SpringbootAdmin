@@ -6,9 +6,10 @@
     <result column="gname" property="gname" jdbcType="VARCHAR" />
     <result column="function" property="function" jdbcType="VARCHAR" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="childtion" property="childtion" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, gname, function, ctime
+    id, gname, function, ctime, childtion
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -66,6 +67,9 @@
       <if test="ctime != null" >
         ctime,
       </if>
+      <if test="childtion != null" >
+        childtion,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -79,6 +83,9 @@
       </if>
       <if test="ctime != null" >
         #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childtion != null" >
+        #{childtion,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -94,6 +101,9 @@
       <if test="ctime != null" >
         ctime = #{ctime,jdbcType=TIMESTAMP},
       </if>
+      <if test="childtion != null" >
+        childtion = #{childtion,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -101,7 +111,8 @@
     update fo_manager_group
     set gname = #{gname,jdbcType=VARCHAR},
       function = #{function,jdbcType=VARCHAR},
-      ctime = #{ctime,jdbcType=TIMESTAMP}
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      childtion = #{childtion,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
