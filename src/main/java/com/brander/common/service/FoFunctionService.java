@@ -26,6 +26,13 @@ public class FoFunctionService {
     }
 
     /**
+     * 根据ID查询一条信息
+     * */
+    public FoFunction selectByPrimaryKey(Integer id){
+        return foFunctionMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 根据关键字like查询 @ 搜索子功能（fid<>0 为子功能） 根据关键字
      * */
     public List<FoFunction> selectByfnameLike(String search){
@@ -66,6 +73,13 @@ public class FoFunctionService {
         zoFunction.setFuri(foFunc.getFuri());
         zoFunction.setCtime(AchieveUtil.getDateTime(""));
         return foFunctionMapper.insertSelective(zoFunction);
+    }
+
+    /**
+     * 编辑功能列表
+     * */
+    public int updateByPrimaryKeySelective(FoFunction foFunction){
+        return foFunctionMapper.updateByPrimaryKeySelective(foFunction);
     }
 
     /**

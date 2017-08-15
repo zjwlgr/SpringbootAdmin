@@ -71,6 +71,29 @@ public class FunctionController {
     }
 
     /**
+     * 编辑功能
+     * */
+    @RequestMapping(value = "/function/up")
+    public String functionUp(ModelMap map, FoFunction foFunction, HttpServletRequest request){
+        if(request.getMethod().equals("GET")) {
+            AdminTitle adminTitle = new AdminTitle();
+            adminTitle.setTitle1("系统功能管理");adminTitle.setTitle2("编辑");
+            map.addAttribute("adminTitle", adminTitle);
+            //返回父功能列表
+            map.addAttribute("FfuncList",foFunctionService.selectByfid(0,false,null,null));
+            //根据当前ID返回功能对象
+            map.addAttribute("functionInfo",foFunctionService.selectByPrimaryKey(foFunction.getId()));
+
+        }else if(request.getMethod().equals("POST")){
+            int resutl = foFunctionService.updateByPrimaryKeySelective(foFunction);
+            if(resutl == 1) {
+                return WebResultUtil.success(map, "系统功能编辑成功！", "/admin/function/list");
+            }
+        }
+        return "admin/function/up";
+    }
+
+    /**
      * 删除功能列表
      * */
     @GetMapping(value = "/function/del")
@@ -104,7 +127,4 @@ public class FunctionController {
         return "admin/function/ajaxleftlist";
     }
 
-
-
-    //TODO 对应用户权限功能列表当前方法可以，判断用户是否有权限 还是单一判断列表页也可以使用indexOf，参考php
 }

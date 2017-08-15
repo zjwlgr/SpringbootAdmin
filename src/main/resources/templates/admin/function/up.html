@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+    <div class="bs-hander">
+        <a th:href="@{/admin/function/list}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 </a>
+        <a th:href="@{/admin/function/add}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp; 新 增 </a>
+    </div>
+
+    <div class="bs-center">
+        <form id="form1_function" name="form1_function" method="post" action="" class="form-horizontal">
+
+            <input name="id" type="hidden"  th:value="${functionInfo.id}">
+
+
+            <div class="form-group" th:if="${functionInfo.fid == 0}">
+                <label for="fname" class="col-sm-2 control-label">功能组名称</label>
+                <div class="col-sm-5">
+                    <input type="hidden" name="furi" id="furi" th:value="${functionInfo.furi}">
+                    <input type="text" class="form-control" name="fname" id="fname" placeholder="功能名称" th:value="${functionInfo.fname}">
+                </div>
+            </div>
+
+            <span th:if="${functionInfo.fid != 0}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">功能组</label>
+                <div class="col-sm-5">
+
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <span id="text" th:each="vo,key:${FfuncList}" th:if="${vo.id == functionInfo.fid}">
+                                    [[${vo.fname}]]
+                                </span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" id="dropdownMenuone" aria-labelledby="dropdownMenu1">
+                            <li th:each="vo,key:${FfuncList}"><a href="#" th:_i="${vo.id}">[[${vo.fname}]]</a></li>
+                        </ul>
+                        <input type="hidden" name="fid" id="fid" th:value="${functionInfo.fid}" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fname" class="col-sm-2 control-label">功能名称</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="fname" id="fname" placeholder="功能名称" th:value="${functionInfo.fname}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="furi" class="col-sm-2 control-label">功能链接</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="furi" id="furi" placeholder="功能链接" th:value="${functionInfo.furi}">
+                </div>
+            </div>
+            </span>
+
+            <div class="form-group">
+                <label for="furi" class="col-sm-2 control-label">排序</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="sort" id="sort" placeholder="排序" th:value="${functionInfo.sort}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="furi" class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-2">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" th:checked="${functionInfo.state == false}" name="state" value="0"> 显示 &nbsp;
+                        </label>
+                        <label>
+                            <input type="radio" th:checked="${functionInfo.state == true}" name="state" value="1"> 隐藏
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"> 提 交 &nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+</html>

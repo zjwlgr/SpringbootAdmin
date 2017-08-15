@@ -103,7 +103,7 @@ public class ManagerController {
             map.addAttribute("userCount", foManagerService.selectByCount());
             //用户组列表
             map.addAttribute("groupList", foManagerGroupService.selectByOption());
-            //对应用户的用户组名称
+            //对应用户的用户组名称，其实可以在模板中完成，参考function/up
             map.addAttribute("groupName",foManagerGroupService.selectByPrimaryKey(managerUser.getGroupId()).getGname());
         }else if(request.getMethod().equals("POST")){
             boolean result = foManagerService.updateByPrimaryKeySelectivePassword(foManager);
