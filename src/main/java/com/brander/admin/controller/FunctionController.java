@@ -2,7 +2,9 @@ package com.brander.admin.controller;
 
 import com.brander.common.domain.AdminTitle;
 import com.brander.common.domain.FoFunction;
+import com.brander.common.domain.FoManager;
 import com.brander.common.service.FoFunctionService;
+import com.brander.common.utils.WebResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -44,6 +47,27 @@ public class FunctionController {
         map.addAttribute("functionList",functionList);
 
         return "admin/function/list";
+    }
+
+    /**
+     * 添加功能
+     * */
+    @RequestMapping(value = "/function/add")
+    public String functionAdd(ModelMap map, FoFunction foFunction, HttpServletRequest request){
+        if(request.getMethod().equals("GET")) {
+            AdminTitle adminTitle = new AdminTitle();
+            adminTitle.setTitle1("系统功能管理");adminTitle.setTitle2("新增");
+            map.addAttribute("adminTitle", adminTitle);
+            //返回父功能列表
+            map.addAttribute("FfuncList",foFunctionService.selectByfid(0,false,null,null));
+
+        }else if(request.getMethod().equals("POST")){
+            int resutl = foFunctionService.insertSelective(foFunction);
+            if(resutl == 1) {
+                return WebResultUtil.success(map, "系统功能新增成功！", "/admin/function/list");
+            }
+        }
+        return "admin/function/add";
     }
 
     /**

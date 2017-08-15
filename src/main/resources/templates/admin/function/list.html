@@ -71,8 +71,8 @@
                 <td>
                     <a th:href="@{/admin/function/up(id=${vov.id})}">编辑</a>
                     |
-                    <a th:href="@{/admin/function/del(id=${vov.id})}" class="delete" th:if="${vo.candel == false}">删除</a>
-                    <span class="text-muted" th:if="${vo.candel == true}">删除</span>
+                    <a th:href="@{/admin/function/del(id=${vov.id})}" class="delete" th:if="${vov.candel == false}">删除</a>
+                    <span class="text-muted" th:if="${vov.candel == true}">删除</span>
                 </td>
             </tr>
 

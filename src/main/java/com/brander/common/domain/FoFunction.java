@@ -20,6 +20,8 @@ public class FoFunction {
 
     private Date ctime;
 
+    private String fidname;
+
     private Integer childfocount;
 
     private List<FoFunction> clist;
@@ -86,6 +88,14 @@ public class FoFunction {
 
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    public String getFidname() {
+        return fidname;
+    }
+
+    public void setFidname(String fidname) {
+        this.fidname = fidname;
     }
 
     public Integer getChildfocount() {

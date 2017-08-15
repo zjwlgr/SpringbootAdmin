@@ -82,7 +82,7 @@
       #{furi,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{candel,jdbcType=BIT}, #{state,jdbcType=BIT}, 
       #{ctime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.brander.common.domain.FoFunction" >
+  <insert id="insertSelective" parameterType="com.brander.common.domain.FoFunction" useGeneratedKeys="true" keyProperty="id">
     insert into fo_function
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

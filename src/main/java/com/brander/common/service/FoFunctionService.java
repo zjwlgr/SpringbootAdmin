@@ -2,6 +2,7 @@ package com.brander.common.service;
 
 import com.brander.common.domain.FoFunction;
 import com.brander.common.mapper.FoFunctionMapper;
+import com.brander.common.utils.AchieveUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,28 @@ public class FoFunctionService {
      * */
     public Integer selectCidCount(Integer fid){
         return foFunctionMapper.selectCidCount(fid);
+    }
+
+    /**
+     * 添加功能列表
+     * */
+    public int insertSelective(FoFunction foFunc){
+        Integer fid = foFunc.getFid();
+        if(fid == 0){ //新增功能组
+            FoFunction foFunction = new FoFunction();
+            foFunction.setFid(fid);
+            foFunction.setFname(foFunc.getFidname());
+            foFunction.setFuri("none");
+            foFunction.setCtime(AchieveUtil.getDateTime(""));
+            foFunctionMapper.insertSelective(foFunction);
+            fid = foFunction.getId();
+        }
+        FoFunction zoFunction = new FoFunction();
+        zoFunction.setFid(fid);
+        zoFunction.setFname(foFunc.getFname());
+        zoFunction.setFuri(foFunc.getFuri());
+        zoFunction.setCtime(AchieveUtil.getDateTime(""));
+        return foFunctionMapper.insertSelective(zoFunction);
     }
 
     /**
