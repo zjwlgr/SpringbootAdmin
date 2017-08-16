@@ -83,6 +83,7 @@ public class LoginController {
             session.setAttribute("adminId", foManager.getId());
             session.setAttribute("adminUsername", foManager.getUsername());
             session.setAttribute("adminUname", foManager.getUname());
+            session.setAttribute("adminGroupid", foManagerGroup.getId());
             session.setAttribute("adminGroupname", foManagerGroup.getGname());
             session.setMaxInactiveInterval(1800);//设置生命周期为30分钟
             return JsonResultUtil.success();
@@ -131,6 +132,7 @@ public class LoginController {
         session.removeAttribute("adminId");
         session.removeAttribute("adminUsername");
         session.removeAttribute("adminUname");
+        session.removeAttribute("adminGroupid");
         session.removeAttribute("adminGroupname");
         response.sendRedirect("/admin/login");
     }

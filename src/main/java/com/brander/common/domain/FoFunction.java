@@ -113,4 +113,21 @@ public class FoFunction {
     public void setClist(List<FoFunction> clist) {
         this.clist = clist;
     }
+
+    @Override
+    public String toString() {
+        return "FoFunction{" +
+                "id=" + id +
+                ", fid=" + fid +
+                ", fname='" + fname + '\'' +
+                ", furi='" + furi + '\'' +
+                ", sort=" + sort +
+                ", candel=" + candel +
+                ", state=" + state +
+                ", ctime=" + ctime +
+                ", fidname='" + fidname + '\'' +
+                ", childfocount=" + childfocount +
+                ", clist=" + clist +
+                '}';
+    }
 }

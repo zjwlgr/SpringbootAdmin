@@ -33,6 +33,13 @@ public class FoFunctionService {
     }
 
     /**
+     * 根据Furi查询一条信息
+     * */
+    public FoFunction selectByFuri(String furi){
+        return foFunctionMapper.selectByFuri(furi);
+    }
+
+    /**
      * 根据关键字like查询 @ 搜索子功能（fid<>0 为子功能） 根据关键字
      * */
     public List<FoFunction> selectByfnameLike(String search){

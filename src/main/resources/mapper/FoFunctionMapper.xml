@@ -70,6 +70,15 @@
     where fid = #{fid}
   </select>
 
+  <!--根据Furi查询一条信息-->
+  <select id="selectByFuri" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    id, fid, fname, furi
+    from fo_function
+    where furi = #{furi}
+    limit 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fo_function
     where id = #{id,jdbcType=INTEGER}

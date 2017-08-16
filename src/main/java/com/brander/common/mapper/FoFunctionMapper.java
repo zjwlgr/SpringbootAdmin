@@ -29,4 +29,7 @@ public interface FoFunctionMapper {
 
     //根据fid查询该fid下面的子功能数量
     Integer selectCidCount(Integer fid);
+
+    //根据Furi查询一条信息
+    FoFunction selectByFuri(String furi);
 }

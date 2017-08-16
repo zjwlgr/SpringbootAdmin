@@ -33,6 +33,18 @@ public class MyArrayUtil {
         return arrayResult;
     }
 
+    /**
+     * 判断数组中是否包含某元素
+     * @param arr 数组
+     * @param targetValue 要查找的元素
+     * */
+    public static boolean useLoop(String[] arr,String targetValue){
+        for(String s:arr){
+            if(s.equals(targetValue))
+                return true;
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
 
