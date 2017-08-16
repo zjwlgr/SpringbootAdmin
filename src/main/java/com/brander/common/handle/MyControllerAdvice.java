@@ -100,14 +100,19 @@ public class MyControllerAdvice {
                     }
                     //判断当前用是否有执行当前页面的权限
                     String nowuri = request.getRequestURI();
-                    FoFunction foFunction = foFunctionService.selectByFuri(nowuri);
-                    if(foFunction != null){//等于空的暂不处理
-                        boolean isreque = MyArrayUtil.useLoop(zidArr,foFunction.getId().toString());
-                        if(!isreque){
-                            //您没有该页面的操作权限
-                            throw new Exception("您没有该页面的操作权限");
+                    if(nowuri.equals("/admin/index")) {
+                        //系统信息查看页面，不判断权限
+                    }else{
+                        FoFunction foFunction = foFunctionService.selectByFuri(nowuri);
+                        if (foFunction != null) {//等于空的暂不处理
+                            boolean isreque = MyArrayUtil.useLoop(zidArr, foFunction.getId().toString());
+                            if (!isreque) {
+                                //您没有该页面的操作权限
+                                throw new Exception("您没有该页面的操作权限");
+                            }
                         }
                     }
+
                 }
                 //返回后台左侧功能列表
                 List<FoFunction> foList = foFunctionService.selectByfid(0,true,null,foFid);
