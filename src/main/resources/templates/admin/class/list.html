@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+
+    <div class="bs-hander" style="position: relative;">
+
+        <a th:href="@{/admin/class/list}" class="btn btn-default active"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp; 列 表 ([[${classCount}]])</a>
+
+        <div class="col-lg-8" style="position: absolute; top: 17px; left: 120px;">
+            <p class="text-danger"><span class="text-muted">提示：删除分类后会同时删除该分类下所有子分类，</span>删除后将不能恢复！</p>
+        </div>
+    </div>
+
+    <div class="bs-center">
+        <span id="class_uri">
+            <input type="hidden" id="addclass-u" value="/admin/class/add">
+            <input type="hidden" id="delclass-u" value="/admin/class/delete">
+            <input type="hidden" id="upclass-u" value="/admin/class/upclass">
+            <input type="hidden" id="updclass-u" value="/admin/class/updown">
+        </span>
+
+        <div class="row show-grid top-table">
+            <div class="col-md-1">ID</div>
+            <div class="col-md-3">名称</div>
+            <div class="col-md-1 text-align">排序</div>
+            <div class="col-md-1 text-align">子数</div>
+            <div class="col-md-1 text-align">操作&nbsp;&nbsp;&nbsp;</div>
+        </div>
+
+        <span th:each="vo,key:${classList}">
+        <div class="row show-grid" mouse="row">
+            <div class="col-md-1 id-text" th:text="${vo.id}"></div>
+            <div class="col-md-4" th:style="'margin-left: '+${vo.depth-1}+'px;'">
+                <div class="input-group input-group-sm">
+            <span class="input-group-btn">
+                 <a href="#" class="btn btn-default text-blue up-down-cla" _set="u" th:_i="${vo.id}" th:id="'rightkey_'+${vo.id}">展开</a>
+            </span>
+                    <input type="text" class="form-control text-black up-old-cla" th:value="${vo.name}" th:_i="${vo.id}" th:_v="${vo.name}">
+                    <span class="input-group-btn sort-input">
+                 <input type="text" class="form-control input-sm up-old-asc" style="border-bottom-right-radius: 4px; border-top-right-radius: 4px;" th:value="${vo.sort}" th:_i="${vo.id}" th:_v="${vo.sort}">
+            </span>
+                </div>
+            </div>
+            <div class="col-md-1 text-align id-text" th:text="${vo.zcount}"></div>
+            <div class="col-md-1">
+                <a href="#" class="btn btn-default btn-sm text-red del-old-cla" th:_i="${vo.id}">删除</a>
+            </div>
+        </div>
+        <span th:id="'next_'+${vo.id}"></span>
+        </span>
+
+
+        <div class="row show-grid">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon iga-img">新增</span>
+                    <input type="text" _i="0" _d="0" class="form-control add-new-cla">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</html>

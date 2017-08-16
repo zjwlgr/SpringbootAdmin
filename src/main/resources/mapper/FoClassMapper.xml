@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.brander.common.mapper.FoClassMapper" >
+  <resultMap id="BaseResultMap" type="com.brander.common.domain.FoClass" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="nexus" property="nexus" jdbcType="VARCHAR" />
+    <result column="depth" property="depth" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fid, nexus, depth, name, sort, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fo_class
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--通过 FID 查询一个父下面子分类的集合-->
+  <select id="selectByfid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_class
+    where fid = #{fid}
+  </select>
+
+  <!--通过 FID 查询子分类总数-->
+  <select id="selectFidCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(id) as total
+    from fo_class
+    where fid = #{fid}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fo_class
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.brander.common.domain.FoClass" >
+    insert into fo_class (id, fid, nexus, 
+      depth, name, sort, 
+      ctime)
+    values (#{id,jdbcType=INTEGER}, #{fid,jdbcType=INTEGER}, #{nexus,jdbcType=VARCHAR}, 
+      #{depth,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.brander.common.domain.FoClass" >
+    insert into fo_class
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="nexus != null" >
+        nexus,
+      </if>
+      <if test="depth != null" >
+        depth,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="nexus != null" >
+        #{nexus,jdbcType=VARCHAR},
+      </if>
+      <if test="depth != null" >
+        #{depth,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.brander.common.domain.FoClass" >
+    update fo_class
+    <set >
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="nexus != null" >
+        nexus = #{nexus,jdbcType=VARCHAR},
+      </if>
+      <if test="depth != null" >
+        depth = #{depth,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.brander.common.domain.FoClass" >
+    update fo_class
+    set fid = #{fid,jdbcType=INTEGER},
+      nexus = #{nexus,jdbcType=VARCHAR},
+      depth = #{depth,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
