@@ -1,0 +1,31 @@
+<span th:each="vo,key:${classList}">
+    <div class="row show-grid" mouse="row">
+        <div class="col-md-1 id-text" th:text="${vo.id}"></div>
+        <div class="col-md-4" th:style="'margin-left: '+${45*(vo.depth-1)}+'px;'">
+            <div class="input-group input-group-sm">
+        <span class="input-group-btn">
+             <a href="#" class="btn btn-default text-blue up-down-cla" _set="u" th:_i="${vo.id}" th:id="'rightkey_'+${vo.id}">展开</a>
+        </span>
+                <input type="text" class="form-control text-black up-old-cla" th:value="${vo.name}" th:_i="${vo.id}" th:_v="${vo.name}">
+                <span class="input-group-btn sort-input">
+             <input type="text" class="form-control input-sm up-old-asc" style="border-bottom-right-radius: 4px; border-top-right-radius: 4px;" th:value="${vo.sort}" th:_i="${vo.id}" th:_v="${vo.sort}">
+        </span>
+            </div>
+        </div>
+        <div class="col-md-1 text-align id-text" th:text="${vo.zcount}"></div>
+        <div class="col-md-1">
+            <a href="#" class="btn btn-default btn-sm text-red del-old-cla" th:_i="${vo.id}">删除</a>
+        </div>
+    </div>
+    <span th:id="'next_'+${vo.id}"></span>
+</span>
+
+<div class="row show-grid">
+    <div class="col-md-1"></div>
+    <div class="col-md-4" th:style="'margin-left: '+${45*classone.depth}+'px;'">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon iga-img">新增</span>
+            <input type="text" th:_i="${classone.id}" th:_d="${classone.depth}" class="form-control add-new-cla">
+        </div>
+    </div>
+</div>

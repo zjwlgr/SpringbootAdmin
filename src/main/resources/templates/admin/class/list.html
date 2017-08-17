@@ -18,7 +18,7 @@
         <span id="class_uri">
             <input type="hidden" id="addclass-u" value="/admin/class/add">
             <input type="hidden" id="delclass-u" value="/admin/class/delete">
-            <input type="hidden" id="upclass-u" value="/admin/class/upclass">
+            <input type="hidden" id="upclass-u" value="/admin/class/up">
             <input type="hidden" id="updclass-u" value="/admin/class/updown">
         </span>
 
@@ -33,7 +33,7 @@
         <span th:each="vo,key:${classList}">
         <div class="row show-grid" mouse="row">
             <div class="col-md-1 id-text" th:text="${vo.id}"></div>
-            <div class="col-md-4" th:style="'margin-left: '+${vo.depth-1}+'px;'">
+            <div class="col-md-4" th:style="'margin-left: '+${45*(vo.depth-1)}+'px;'">
                 <div class="input-group input-group-sm">
             <span class="input-group-btn">
                  <a href="#" class="btn btn-default text-blue up-down-cla" _set="u" th:_i="${vo.id}" th:id="'rightkey_'+${vo.id}">展开</a>

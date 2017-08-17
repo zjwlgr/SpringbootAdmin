@@ -22,4 +22,7 @@ public interface FoClassMapper {
 
     //通过 FID 查询子分类总数
     int selectFidCount(Integer fid);
+
+    //根据FID删除所有关联分类
+    int deleteByNexus(Integer fid);
 }

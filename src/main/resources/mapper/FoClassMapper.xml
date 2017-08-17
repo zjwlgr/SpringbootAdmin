@@ -35,6 +35,12 @@
     where fid = #{fid}
   </select>
 
+  <!--根据FID删除所有关联分类-->
+  <delete id="deleteByNexus" parameterType="java.lang.Integer" >
+    delete from fo_class
+    where FIND_IN_SET(#{fid},nexus)
+  </delete>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fo_class
     where id = #{id,jdbcType=INTEGER}
@@ -47,7 +53,7 @@
       #{depth,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{ctime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.brander.common.domain.FoClass" >
+  <insert id="insertSelective" parameterType="com.brander.common.domain.FoClass" useGeneratedKeys="true" keyProperty="id">
     insert into fo_class
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

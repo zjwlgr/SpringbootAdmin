@@ -1,7 +1,7 @@
 $(function(){
 
     $loadimg = '<img src="/image/loaders/1.gif" />';
-    $csrf = $("meta[name='csrf-token']").attr('content');
+    $csrf = "";
     String.prototype.trim=function() {
         return this.replace(/(^\s*)|(\s*$)/g,'');
     }
