@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50615
 File Encoding         : 65001
 
-Date: 2017-08-17 16:48:01
+Date: 2017-09-25 10:30:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -136,9 +136,8 @@ CREATE TABLE `fo_manager` (
 -- ----------------------------
 -- Records of fo_manager
 -- ----------------------------
-INSERT INTO `fo_manager` VALUES ('1', 'zjwlgr', '02bbc9253fb630843b6af6a95a501908', '张健', '1', '0', '643', '0:0:0:0:0:0:0:1', '2017-08-17 11:22:28', '1985-11-04 00:43:03');
-INSERT INTO `fo_manager` VALUES ('19', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'adminz', '2', '0', '8', '0:0:0:0:0:0:0:1', '2017-08-16 17:30:15', '2017-08-10 16:43:03');
-INSERT INTO `fo_manager` VALUES ('20', 'lwqbj', 'e10adc3949ba59abbe56e057f20f883e', '阿苏', '1', '0', '7', '0:0:0:0:0:0:0:1', '2017-08-14 14:01:47', '2017-08-10 16:43:03');
+INSERT INTO `fo_manager` VALUES ('1', 'zjwlgr', '02bbc9253fb630843b6af6a95a501908', '张健', '1', '0', '647', '117.107.204.226', '2017-09-22 17:51:59', '1985-11-04 00:43:03');
+INSERT INTO `fo_manager` VALUES ('19', 'admin', '7a12a47984333222320df4510947fbdd', 'xxxxx', '1', '0', '9', '117.107.204.225', '2017-09-22 17:48:28', '2017-08-10 16:43:03');
 
 -- ----------------------------
 -- Table structure for fo_manager_group
@@ -169,11 +168,11 @@ CREATE TABLE `fo_manager_record` (
   `username` varchar(32) DEFAULT NULL,
   `uname` varchar(32) DEFAULT NULL,
   `ip` varchar(15) DEFAULT NULL,
-  `ctime` datetime DEFAULT '0000-00-00 00:00:00',
+  `ctime` datetime DEFAULT NULL,
   `browser` varchar(512) DEFAULT NULL COMMENT '浏览器信息',
   `system` varchar(512) DEFAULT NULL COMMENT '系统信息',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=350 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=355 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fo_manager_record
@@ -256,3 +255,8 @@ INSERT INTO `fo_manager_record` VALUES ('346', '1', 'zjwlgr', '张健', '0:0:0:0
 INSERT INTO `fo_manager_record` VALUES ('347', '1', 'zjwlgr', '张健', '0:0:0:0:0:0:0:1', '2017-08-17 10:24:06', 'Chrome/57', 'Windows');
 INSERT INTO `fo_manager_record` VALUES ('348', '1', 'zjwlgr', '张健', '0:0:0:0:0:0:0:1', '2017-08-17 11:00:02', 'Chrome/57', 'Windows');
 INSERT INTO `fo_manager_record` VALUES ('349', '1', 'zjwlgr', '张健', '0:0:0:0:0:0:0:1', '2017-08-17 11:22:28', 'Chrome/57', 'Windows');
+INSERT INTO `fo_manager_record` VALUES ('350', '1', 'zjwlgr', '张健', '0:0:0:0:0:0:0:1', '2017-09-22 17:15:33', 'Chrome/57', 'Windows');
+INSERT INTO `fo_manager_record` VALUES ('351', '1', 'zjwlgr', '张健', '117.107.204.226', '2017-09-22 17:40:48', 'Chrome/57', 'Windows');
+INSERT INTO `fo_manager_record` VALUES ('352', '1', 'zjwlgr', '张健', '117.107.204.226', '2017-09-22 17:45:11', 'Chrome/57', 'Windows');
+INSERT INTO `fo_manager_record` VALUES ('353', '19', 'admin', 'xxxxx', '117.107.204.225', '2017-09-22 17:48:28', 'Safari Version/11.0', 'Mac OS X 10_');
+INSERT INTO `fo_manager_record` VALUES ('354', '1', 'zjwlgr', '张健', '117.107.204.226', '2017-09-22 17:51:59', 'Chrome/57', 'Windows');
